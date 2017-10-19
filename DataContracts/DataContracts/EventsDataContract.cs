@@ -43,49 +43,9 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
             public string DisplayName { get; set; }
 
             /// <summary>
-            /// Timetable Display Name
+            /// Events 
             /// </summary>
-            public string TimeTableDisplayName { get; set; }
-
-            /// <summary>
-            /// Previous Week Monday (from view model)
-            /// </summary>
-            public string PreviousWeekMonday { get; set; }
-
-            /// <summary>
-            /// Next Week Monday (from view model)
-            /// </summary>
-            public string NextWeekMonday { get; set; }
-
-            /// <summary>
-            /// Deprecated Field (from view model)
-            /// </summary>
-            public bool IsPreviousWeekReferenceAvailable { get; set; }
-
-            /// <summary>
-            /// Deprecated Field (from view model)
-            /// </summary>
-            public bool IsNextWeekReferenceAvailable { get; set; }
-
-            /// <summary>
-            /// Deprecated Field (from view model)
-            /// </summary>
-            public bool IsCurrentWeekReferenceAvailable { get; set; }
-
-            /// <summary>
-            /// Requested week's display text
-            /// </summary>
-            public string WeekDisplayText { get; set; }
-
-            /// <summary>
-            /// Requested week's monday date
-            /// </summary>
-            public string WeekMonday { get; set; }
-
-            /// <summary>
-            /// Events grouped by days
-            /// </summary>
-            public IEnumerable<EventsDay> Days { get; set; }
+            public IEnumerable<Event> Events { get; set; }
 
             /// <summary>
             /// Event Data Contract
@@ -221,26 +181,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
                 public IEnumerable<Tuple<int, string>> EducatorIds { get; set; }
             }
 
-            /// <summary>
-            /// Events' Day Data Contract
-            /// </summary>
-            public class EventsDay
-            {
-                /// <summary>
-                /// Day's datetime
-                /// </summary>
-                public DateTime Day { get; set; }
 
-                /// <summary>
-                /// Day's display text
-                /// </summary>
-                public string DayString { get; set; }
-
-                /// <summary>
-                /// Events
-                /// </summary>
-                public IEnumerable<Event> DayStudyEvents { get; set; }
-            }
         }
 
 
