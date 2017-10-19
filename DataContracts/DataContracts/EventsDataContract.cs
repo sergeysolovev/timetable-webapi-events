@@ -45,12 +45,12 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
             /// <summary>
             /// Events 
             /// </summary>
-            public IEnumerable<Event> Events { get; set; }
+            public IEnumerable<EventContract> Events { get; set; }
 
             /// <summary>
             /// Event Data Contract
             /// </summary>
-            public class Event
+            public class EventContract
             {
                 /// <summary>
                 /// Start
@@ -68,36 +68,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
                 public string Subject { get; set; }
 
                 /// <summary>
-                /// Time Interval String
-                /// </summary>
-                public string TimeIntervalString { get; set; }
-
-                /// <summary>
-                /// Date with Time Interval String
-                /// </summary>
-                public string DateWithTimeIntervalString { get; set; }
-
-                /// <summary>
-                /// Display Date and Time Interval String
-                /// </summary>
-                public string DisplayDateAndTimeIntervalString { get; set; }
-
-                /// <summary>
-                /// Locations Display Text
-                /// </summary>
-                public string LocationsDisplayText { get; set; }
-
-                /// <summary>
-                /// Educators Display Text
-                /// </summary>
-                public string EducatorsDisplayText { get; set; }
-
-                /// <summary>
-                /// Determines whether event has educators
-                /// </summary>
-                public bool HasEducators { get; set; }
-
-                /// <summary>
                 /// Determines whether event is cancelled
                 /// </summary>
                 public bool IsCancelled { get; set; }
@@ -113,10 +83,9 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
                 public string ContingentUnitName { get; set; }
 
                 /// <summary>
-                /// Contingent Unit's Division and Course (from view model)
+                /// Division Id
                 /// </summary>
-                public string DivisionAndCourse { get; set; }
-
+                public string DivisionId { get; set; }
                 /// <summary>
                 /// Determines whether the event was assigned
                 /// after all the events have been planned
@@ -145,40 +114,11 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
                 public bool IsFacultative { get; set; }
 
                 /// <summary>
-                /// Determines whether event has the same time as the previous
-                /// event in the list (from view model)
-                /// </summary>
-                public bool HasTheSameTimeAsPreviousItem { get; set; }
-
-                /// <summary>
-                /// Deprecated Field
-                /// </summary>
-                public string ContingentUnitsDisplayTest { get; set; }
-
-                /// <summary>
-                /// Determines whether event is a study event
-                /// </summary>
-                public bool IsStudy { get; set; }
-
-                /// <summary>
-                /// Determines whether event is for all day (no time defined)
-                /// </summary>
-                public bool AllDay { get; set; }
-
-                /// <summary>
-                /// Determines whether event occurs within the same day
-                /// </summary>
-                public bool WithinTheSameDay { get; set; }
-
-                /// <summary>
                 /// Event's locations
                 /// </summary>
                 public IEnumerable<EventLocationContract> EventLocations { get; set; }
 
-                /// <summary>
-                /// Educators' Ids
-                /// </summary>
-                public IEnumerable<Tuple<int, string>> EducatorIds { get; set; }
+
             }
 
 
