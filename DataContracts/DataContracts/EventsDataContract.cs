@@ -34,7 +34,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
             /// <summary>
             /// Student's Group Id
             /// </summary>
-            [JsonProperty("StudentGroupId")]
             public int Id { get; set; }
 
             /// <summary>
