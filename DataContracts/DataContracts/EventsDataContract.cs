@@ -59,12 +59,13 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
             /// <summary>
             /// Timetable kind code (from view model)
             /// </summary>
-            public int? StudyEventsTimeTableKindCode;
+            [JsonProperty("Timetable")]
+            public int? TimetableKindCode;
 
             /// <summary>
-            /// Contingent Unit's Name (from view model)
+            /// Group Id
             /// </summary>
-            public string ContingentUnitName { get; set; }
+            public string GroupId { get; set; }
 
             /// <summary>
             /// Division Id
@@ -102,6 +103,24 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
             /// Event's locations
             /// </summary>
             public IEnumerable<EventLocationContract> EventLocations { get; set; }
+
+            /// <summary>
+            /// Event Location Data Contract
+            /// </summary>
+            public class EventLocationContract
+            {
+                /// <summary>
+                /// Latitude
+                /// </summary>
+                public double Latitude { get; set; }
+
+                /// <summary>
+                /// Longitude
+                /// </summary>
+                public double Longitude { get; set; }
+
+
+            }
 
 
         }
