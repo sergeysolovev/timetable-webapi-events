@@ -1,6 +1,6 @@
 ﻿Обязательные параметры в путь, не обязательные в кач-ве парамтров
 
-api/v1/groups/{id}/events/{from}/{to}&timetableType={type}
+api/v1/groups/{id}/events/{from}/{to}?timetable={timetable}
 
 ## Именно так потому что:
 	1. Номер группы обязателен, что бы было известно для какой группы выдавать расписание
@@ -14,11 +14,15 @@ api/v1/groups/{id}/events/{from}/{to}&timetableType={type}
 	т.к методы 
 	
 	/api/v1/groups/{id}/events
-    /api/v1/groups/{id}/events/{from}
+    /api/v1/groups/{id}/events
 
 	Выглядят как единое целое, и 
-	api/v1/group/{id}/events/{from}/{to}&timetableType={type}
+	
+	api/v1/group/{id}/events/{from}/{to}?timetable={timetable}
+	
 	тоже продолжает эту структуру, то слеует добавить параметр 
-	timetableType={type}
-	и для описанных выше двух методов.
+	?timetable={timetable}
+	и для описанных выше двух методов:
 
+	/api/v1/groups/{id}/events?timetable={timetable}
+	/api/v1/groups/{id}/events?timetable={timetable}
