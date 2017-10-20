@@ -1,0 +1,36 @@
+﻿@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+
+@helper selected(string c, string culture)
+{
+    if (c == culture)
+    {
+        @:checked="checked"
+    }
+}
+
+@using (Html.BeginForm("SetClientCultureCookie", "Base"))
+{
+    <fieldset>
+        <div class="control-group">
+            <div class="controls">
+                <label for="en-us" title="Switch to English">
+                    <input class="locale-option" name="clientCultureName" id="en-us" value="en-us" type="radio" @selected("en-us", culture) />
+                    En
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label for="ru" title="Переключить на Русский">
+                    <input class="locale-option" name="clientCultureName" id="ru" value="ru" type="radio" @selected("ru", culture) />
+                    Ру
+                </label>
+            </div>
+        </div>
+        <div class="control-group buttons">
+            <input id="locale-submit" type="submit" value="Submit" />
+        </div>
+    </fieldset>
+}

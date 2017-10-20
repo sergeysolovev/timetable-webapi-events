@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="course" xml:space="preserve">
+    <value>course</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>Field of study</value>
+  </data>
+  <data name="Divisions" xml:space="preserve">
+    <value>Fields of study</value>
+  </data>
+  <data name="SpbuTimetable" xml:space="preserve">
+    <value>SPbU timetables</value>
+  </data>
+  <data name="StudyProgram" xml:space="preserve">
+    <value>Educational programme</value>
+  </data>
+  <data name="StudyPrograms" xml:space="preserve">
+    <value>Educational programmes</value>
+  </data>
+  <data name="StudyProgramTimetables" xml:space="preserve">
+    <value>Educational programme timetables</value>
+  </data>
+  <data name="TimetablesUnavailable" xml:space="preserve">
+    <value>Timetables unavailable</value>
+  </data>
+  <data name="yearOfAdmission" xml:space="preserve">
+    <value>year of admission</value>
+  </data>
+  <data name="nextWeek" xml:space="preserve">
+    <value>next week ›</value>
+  </data>
+  <data name="previousWeek" xml:space="preserve">
+    <value>‹ previous week</value>
+  </data>
+  <data name="toStart" xml:space="preserve">
+    <value>current week</value>
+  </data>
+  <data name="NoEvents" xml:space="preserve">
+    <value>No events</value>
+  </data>
+  <data name="StudentGroup" xml:space="preserve">
+    <value>Student group</value>
+  </data>
+  <data name="Educator" xml:space="preserve">
+    <value>Lecturer</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Program" xml:space="preserve">
+    <value>Programme</value>
+  </data>
+  <data name="Timetable" xml:space="preserve">
+    <value>Timetable</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="IntermediaryAttestationForPrevious" xml:space="preserve">
+    <value>Intermediary attestation for the previous</value>
+  </data>
+  <data name="TimeTablesFor" xml:space="preserve">
+    <value>Timetables for</value>
+  </data>
+  <data name="TimeTablesForGroupUnavailable" xml:space="preserve">
+    <value>Timetables for this academic group are not available.</value>
+  </data>
+  <data name="YearsOfAdmission" xml:space="preserve">
+    <value>Years of admission</value>
+  </data>
+  <data name="toCurrentMonth" xml:space="preserve">
+    <value>to current month</value>
+  </data>
+  <data name="BreadcrumbRoot" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Extracurricular" xml:space="preserve">
+    <value>Extracurricular</value>
+  </data>
+  <data name="Timetables" xml:space="preserve">
+    <value>Timetables</value>
+  </data>
+  <data name="TimetableForEducator" xml:space="preserve">
+    <value>Lecturer's timetable:</value>
+  </data>
+  <data name="Educators" xml:space="preserve">
+    <value>Lecturers</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchEducator" xml:space="preserve">
+    <value>Search for a lecturer</value>
+  </data>
+  <data name="SearchEducatorByLastname" xml:space="preserve">
+    <value>Search by lastname...</value>
+  </data>
+  <data name="TimetablesForEducators" xml:space="preserve">
+    <value>Lecturers timetables</value>
+  </data>
+  <data name="EducatorNotFound" xml:space="preserve">
+    <value>Lecturers not found by search query</value>
+  </data>
+  <data name="ToWholeSemester" xml:space="preserve">
+    <value>for a term</value>
+  </data>
+  <data name="toAutumnSemester" xml:space="preserve">
+    <value>autumn term</value>
+  </data>
+  <data name="ToSpringSemester" xml:space="preserve">
+    <value>spring term</value>
+  </data>
+  <data name="ToCurrentWeek" xml:space="preserve">
+    <value>for a week</value>
+  </data>
+  <data name="EventsNotFound" xml:space="preserve">
+    <value>No events were found</value>
+  </data>
+  <data name="SearchForEvents" xml:space="preserve">
+    <value>Search for events...</value>
+  </data>
+  <data name="SearchEventsPast" xml:space="preserve">
+    <value>Past</value>
+  </data>
+  <data name="SearchEventsUpcoming" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
+  <data name="XtracurEventAgenda" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="XtracurEventCancelled" xml:space="preserve">
+    <value>The event was cancelled</value>
+  </data>
+  <data name="XtracurEventNoData" xml:space="preserve">
+    <value>Information about the event is not available</value>
+  </data>
+  <data name="HasAgenda" xml:space="preserve">
+    <value>Event with agenda</value>
+  </data>
+  <data name="PhysTraining" xml:space="preserve">
+    <value>Physical training</value>
+  </data>
+  <data name="allClasses" xml:space="preserve">
+    <value>all classes</value>
+  </data>
+  <data name="finalAttestation" xml:space="preserve">
+    <value>final attestation</value>
+  </data>
+  <data name="interimAttestation" xml:space="preserve">
+    <value>interim attestation</value>
+  </data>
+  <data name="toSemester" xml:space="preserve">
+    <value>to semester</value>
+  </data>
+  <data name="springSemester" xml:space="preserve">
+    <value>spring semester</value>
+  </data>
+  <data name="autumnSemester" xml:space="preserve">
+    <value>autumn semester</value>
+  </data>
+  <data name="toWeek" xml:space="preserve">
+    <value>to week</value>
+  </data>
+  <data name="LongEvents" xml:space="preserve">
+    <value>Long events</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>download</value>
+  </data>
+  <data name="elective" xml:space="preserve">
+    <value>elective</value>
+  </data>
+  <data name="facultative" xml:space="preserve">
+    <value>facultative</value>
+  </data>
+  <data name="AllYears" xml:space="preserve">
+    <value>All years</value>
+  </data>
+</root>

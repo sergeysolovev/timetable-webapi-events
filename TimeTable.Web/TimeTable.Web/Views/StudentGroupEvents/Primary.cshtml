@@ -1,0 +1,84 @@
+﻿@using SpbuEducation.TimeTable.Common.Web.ViewModels
+@model SpbuEducation.TimeTable.Web.ViewModels.StudentGroupEventsPrimaryViewModel
+
+@{
+    ViewBag.Title = Resources.SpbuTimetable;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2 style="display: inline;">@Html.DisplayFor(vm => Model.StudentGroupDisplayName)</h2>
+<a href="@Url.Action("ExcelWeek", "StudentGroupEvents", new {studentGroupId = Model.StudentGroupId, weekMonday = Model.WeekMonday})" style="float: right; margin-top: 10px;">
+    <span style="font-size: large;">
+        <i class="glyphicon glyphicon-cloud-download"></i> @Resources.download
+    </span>
+</a>
+<h3>@Html.DisplayFor(vm => Model.TimeTableDisplayName)</h3>
+
+<div id="timetable-week-navigator">
+    @if (Model.IsPreviousWeekReferenceAvailable)
+    {
+        @Html.ActionLink(Resources.previousWeek, "Primary", "StudentGroupEvents",
+            new { studentGroupId = Model.StudentGroupId, weekMonday = Model.PreviousWeekMonday },
+            new { @class = "prev-week" })
+    }
+    @if (Model.IsNextWeekReferenceAvailable)
+    {
+        @Html.ActionLink(Resources.nextWeek, "Primary", "StudentGroupEvents",
+            new { studentGroupId = Model.StudentGroupId, weekMonday = Model.NextWeekMonday },
+            new { @class = "next-week" })
+    }
+
+    <div id="timetable-week-navigator-chosen-week">
+        <div style="position: relative">
+            <a href="javascript:void(0)"
+               id="week"
+               data-url="@Url.Action("Primary", "StudentGroupEvents")"
+               data-weekmonday="@Model.WeekMonday">
+                <i class="glyphicon glyphicon-calendar">
+                </i>
+                <span>@Model.WeekDisplayText</span>
+            </a>
+            <input type="hidden" class="weektimepicker form-control" />
+            @if (Model.IsCurrentWeekReferenceAvailable)
+            {
+                <span>|</span> @Html.ActionLink(Resources.toStart, "Primary", "StudentGroupEvents", new { studentGroupId = Model.StudentGroupId }, null)
+            }
+            <span>|</span> @Html.ActionLink(Resources.toSemester, "Semester", "StudentGroupEvents")
+        </div>
+    </div>
+</div>
+
+<div id="view-mode-panel" class="text-right">
+    @Resources.allClasses |
+    @Html.ActionLink(Resources.interimAttestation, "Attestation", "StudentGroupEvents") |
+    @Html.ActionLink(Resources.finalAttestation, "Final", "StudentGroupEvents")
+</div>
+
+<div class="panel-group" id="accordion">
+    @if (!Model.Days.Any())
+    {
+        <div class="alert alert-warning">@Resources.NoEvents</div>
+    }
+    @foreach (var day in Model.Days)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    @Html.DisplayFor(x => day.DayString)
+                </h4>
+            </div>
+            <ul class="panel-collapse nopadding nomargin">
+                @foreach (var studyEvent in day.DayStudyEvents)
+                {
+                    <li class="common-list-item row">
+                        @Html.Partial("~/Views/Shared/_DateTime.cshtml", studyEvent.DateTime.TimeOnly())
+                        @Html.Partial("~/Views/Shared/_EventSubject.cshtml", studyEvent)
+                        @Html.Partial("~/Views/Shared/_EventLocations.cshtml", studyEvent)
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

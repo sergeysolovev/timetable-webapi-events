@@ -1,0 +1,112 @@
+﻿@model SpbuEducation.TimeTable.Common.Web.ViewModels.XtracurEventShowViewModel
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        @if (!Model.IsEmpty)
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="xtracur-modal-title">@Html.DisplayFor(x => Model.Subject)</h3>
+                <h4 class="xtracur-title">@Html.DisplayFor(x => Model.DateWithTimeIntervalString)</h4>
+            </div>
+        }
+        @if (Model.IsCancelled)
+        {
+            <div class="modal-body">
+                <h4 style="text-align: center">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    @Resources.XtracurEventCancelled
+                </h4>
+            </div>
+        }
+        else if (Model.HasNoData)
+        {
+            <div class="modal-body">
+                <h4 style="text-align: center">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    @Resources.XtracurEventNoData
+                </h4>
+            </div>
+        }
+        else
+        {
+            <div class="modal-body" style="padding-top: 0px;">
+                <div style="margin-top: 10px">
+                    @if (Model.HasImage)
+                    {
+                        <div class="pull-right"><img src="@Url.Action("ShowImage", "XtracurEvents", new { id = Model.Image })" class="img-responsive xtracur-img" /></div>
+                    }
+                    @if (!Model.IsDescriptionEmpty)
+                    {
+                        if (Model.HasImage)
+                        {
+                            <div class="xtracur-description">
+                            @foreach (var s in Model.Description)
+                            {
+                                @Html.DisplayFor(vm => s)<br />
+                            }
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (var s in Model.Description)
+                            {
+                                @Html.DisplayFor(vm => s)<br />
+                            }
+                        }
+                    }
+                </div>
+                @if (!Model.Location.IsEmpty)
+                {
+                    if (Model.HasEducators)
+                    {
+                        <div style="margin-top: 10px">
+                            <i class="glyphicon glyphicon-user"></i>
+                            @Model.EducatorsDisplayText
+                        </div>
+                    }
+                    <h4>
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                        @Html.DisplayFor(vm => Model.Location.DisplayName)
+                    </h4>
+                    if (Model.Location.HasGeographicCoordinates)
+                    {
+                        <div id="map-container" data-lat="@Model.Location.LatitudeValue"
+                            data-lng="@Model.Location.LongitudeValue">
+                        </div>
+                    }
+                }
+                <div class="xtracur-description-modal-subevents">
+                    @if (Model.SubEvents.Any())
+                    {
+                        <h4>
+                            <i class="glyphicon glyphicon-th-list"></i>
+                            @Resources.XtracurEventAgenda
+                        </h4>
+                        <ul class="nopadding nomargin">
+                            @foreach (var subevent in Model.SubEvents)
+                            {
+                                <li class="common-list-item row">
+                                    <div class="col-sm-4 studyevent-datetime">
+                                        <i class="glyphicon glyphicon-time"></i>
+                                        @Html.DisplayFor(vm => subevent.DateWithTimeIntervalString);
+                                    </div>
+                                    <div class="col-sm-4 studyevent-subject">
+                                        @Html.DisplayFor(vm => subevent.Subject)
+                                    </div>
+                                    <div class="col-sm-4 studyevent-locations">
+                                    @if (!subevent.Location.IsEmpty)
+                                    {
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                        @Html.DisplayFor(vm => subevent.Location.DisplayName)
+                                    }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

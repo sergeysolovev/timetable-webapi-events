@@ -1,0 +1,27 @@
+﻿@model SpbuEducation.TimeTable.Common.Web.ViewModels.IEventWithSubjectViewModel
+
+<div class="col-sm-4 studyevent-subject">
+    <div class="with-icon">
+        <i class="glyphicon glyphicon-education"></i>
+        <div>
+            <span class="moreinfo @Model.ClassName"
+                    title="@Model.SubjectTooltip"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-container="body">
+                @Model.Subject
+            </span>
+        </div>
+    </div>
+@if (Model.ShowCohort)
+{
+    <div class="with-icon">
+        <i class="glyphicon glyphicon-transfer"></i>
+        <div>
+            <span class="@Model.ClassName">
+                @Model.Cohort
+            </span>
+        </div>
+    </div>
+}
+</div>

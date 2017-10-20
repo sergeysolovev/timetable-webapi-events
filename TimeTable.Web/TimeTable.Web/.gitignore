@@ -1,0 +1,9 @@
+node_modules
+bin
+obj
+*.csproj.user
+*.csproj.vspscc
+App_Data/XmlDocument.XML
+
+static
+asset-manifest.json

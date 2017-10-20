@@ -1,0 +1,16 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.StudentGroupItemViewModel
+
+<li class="common-list-item row">
+    <div class="tile" onclick="window.location.href='@Url.Action("Primary", "StudentGroupEvents",
+                            new { publicDivisionAlias = Model.PublicDivisionAlias, studentGroupId = Model.StudentGroupId })'">
+        <div class="col-sm-4">
+            @Html.DisplayFor(x => Model.StudentGroupName)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayFor(x => Model.StudentGroupStudyForm)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayFor(x => Model.StudentGroupProfiles)
+        </div>
+    </div>
+</li>

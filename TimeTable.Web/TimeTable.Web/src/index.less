@@ -1,0 +1,366 @@
+﻿@import 'bootstrap/less/bootstrap.less';
+@import 'bootswatch/united/bootswatch.less';
+@import 'variables.less';
+@import 'eonasdan-bootstrap-datetimepicker/src/less/_bootstrap-datetimepicker.less';
+
+body {
+    padding-top: 48px;
+    padding-bottom: 20px;
+}
+
+    .navbar .locale-switcher {
+        color: #fff;
+        float: right;
+        padding: 13px 0 0 0;
+    }
+
+        .navbar .locale-switcher input {
+            opacity: 0;
+            position: absolute;
+              top: -200px;
+              left: -200px;
+        }
+
+        .navbar .locale-switcher .control-group {
+            float: left;
+        }
+
+            .navbar .locale-switcher .control-group label {
+                border-radius: 3px;
+                cursor: pointer;
+                line-height: 22px;
+                text-align: center;
+                height: 25px;
+                overflow: hidden;
+                position: relative;
+                width: 30px;
+            }
+
+            .navbar .locale-switcher .control-group.active label {
+                background: @locale-switcher-btn-bg;
+            }
+
+        .navbar .locale-switcher .control-group.buttons {
+            display: none;
+        }
+
+.student-groups {
+    margin-top: 35px;
+}
+
+.tile {
+    cursor: pointer;
+}
+
+.studyevents {
+    margin-top: 35px;
+}
+
+.timetables {
+    margin-top: 20px;
+}
+
+.nopadding {
+    padding: 0;
+}
+
+.nomargin {
+    margin: 0;
+}
+
+.subkindmargin {
+    margin: 0 0 20px 0;
+}
+
+.first-list-item-no-border-top li:first-child {
+    border-top: none;
+}
+
+.common-list-item {
+    position: relative;
+    display: block;
+    padding: 10px 0px;
+    margin-bottom: -1px;
+    background-color: #FFF;
+    border-top: 1px solid #DDD;
+    &:last-child {
+        border-bottom: 1px solid #DDD;
+    }
+}
+
+    .common-list-item.active, .common-list-item:hover {
+        background-color: #F8F7F5;
+    }
+
+    .common-list-item .hoverable {
+        border-bottom: 1px dotted #999;
+    }
+
+    .common-list-item .moreinfo {
+        cursor: help;
+    }
+
+    .common-list-item .hoverable:hover {
+        border-bottom: 1px dotted #333;
+    }
+
+    .common-list-item .hoverable a {
+        color: #333;
+    }
+
+    .common-list-item .link {
+        cursor: pointer;
+    }
+
+    .common-list-item a {
+        text-decoration: none
+    }
+
+    .common-list-item .cancelled {
+        background: #FFEBCF;
+        text-decoration: line-through;
+    }
+
+    .common-list-item .assigned {
+        background: #E8FFC8;
+    }
+
+    .common-list-item .changed {
+        background: #FFFECF;
+    }
+
+    .common-list-item .with-icon {
+        display: flex;
+        align-items: baseline;
+    }
+
+        .common-list-item .with-icon i {
+            font-size: .9em;
+            margin-right: .3em;
+        }
+
+        .common-list-item .with-icon i .invisible {
+            visibility: hidden
+        }
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+#timetable-week-navigator {
+    display: block;
+    /*margin: 0 auto 10px;*/
+}
+
+#timetable-week-navigator-chosen-week {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 350px;
+}
+
+#timetable-week-navigator a.action {
+    border: none;
+}
+
+#timetable-week-navigator .prev-week {
+    float: left;
+}
+
+#timetable-week-navigator .next-week {
+    float: right;
+}
+
+.location-educator-table {
+     margin-top: -1px;
+}
+
+    .location-educator-table .highlight-row {
+        background: #FFFECF;
+    }
+
+#locations-educators-modal .modal-title {
+    text-align: center;
+}
+
+#locations-educators-modal .modal-body {
+    height: 400px;
+    overflow: auto;
+}
+
+#locations-educators-modal .modal-footer {
+    text-align: center;
+    margin-top: -1px;
+}
+
+#map-address-modal .modal-title {
+    text-align: center;
+}
+
+#map-address-modal .modal-body {
+    padding: 0;
+}
+
+#map-address-modal .modal-footer {
+    margin-top: 0;
+    text-align: center;
+}
+
+.xtracur-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.xtracur-address-title {
+    margin-top: -10px;
+}
+
+.xtracur-modal-title {
+    line-height: 1 !important;
+    margin: 0 0 7px 0 !important;
+}
+
+.xtracur-img {
+    padding: 0 0 20px 20px;
+}
+
+.xtracur-description {
+    min-height: 200px;
+}
+
+.error-page {
+    border-radius: 0;
+    max-width: 600px;
+    margin: 50px auto 0;
+    padding: 0;
+    background: transparent;
+}
+.error-page ul {
+    font-size: 21px;
+}
+.error-page .buttons {
+    margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 16px !important;
+        display: inline-block;
+        float: none;
+    }
+
+    #navbar-back-button {
+        color: #fff;
+        font-size: 20px;
+        line-height: 53px;
+        text-align: center;
+        float: left;
+        height: 50px;
+        display: block;
+        position: relative;
+        left: -15px;
+        width: 50px;
+    }
+
+    .navbar-header {
+        text-align: center;
+    }
+
+    h2,
+    .h2 {
+        font-size: 18px !important;
+    }
+
+    h3,
+    .h3 {
+        font-size: 16px !important;
+    }
+    body {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #timetable-week-navigator {
+
+    }
+
+      #timetable-week-navigator .prev-week,
+      #timetable-week-navigator .next-week {
+          color: #fff;
+          display: block;
+          border-radius: 3px;
+          text-indent: 0;
+          overflow: hidden;
+          position: relative;
+          height: 20px;
+          width: 20px;
+      }
+
+        #timetable-week-navigator .prev-week:before,
+        #timetable-week-navigator .next-week:before {
+          color: #dd4814;
+          font-weight: normal;
+          font-size: 18px;
+          display: block;
+          height: 20px;
+          width: 20px;
+          line-height: 20px;
+          text-align: center;
+          position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #timetable-week-navigator .prev-week:before {
+          content: '«';
+        }
+        #timetable-week-navigator .next-week:before {
+          content: '»';
+        }
+
+      #timetable-week-navigator-chosen-week {
+          margin: 0 20px;
+          /*
+          height: 20px;
+          */
+          height: auto;
+          line-height: 20px;
+          width: auto;
+      }
+  .error-page p,
+    .error-page ul {
+        font-size: 1em;
+    }
+    .error-page {
+        margin-top: 0;
+    }
+    .error-page .btn-lg {
+        font-size: 1em;
+        padding: 5px 10px;
+    }
+}
+.bootstrap-datetimepicker-widget tr:hover {
+    background-color: rgba(0,0,0,.25);
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    left: 54px !important;
+}
+a#week {
+    text-decoration: none;
+    /*color: black;*/
+}
+.bootstrap-datetimepicker-widget td.active, .bootstrap-datetimepicker-widget td.active:hover {
+    background-color: rgba(0,0,0,.25);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+#accordion {
+    margin-top: 5px;
+}
+
+@media (max-width: 767px) {
+    div#view-mode-panel.text-right {
+        text-align: center;
+    }
+}

@@ -1,0 +1,11 @@
+﻿@model SpbuEducation.TimeTable.Common.Web.ViewModels.EventItemViewModel
+
+<li class="common-list-item row">
+    <div class="col-sm-2 studyevent-datetime">
+        <i class="glyphicon glyphicon-time"></i>
+        @Html.DisplayFor(vm => Model.TimeIntervalString);
+    </div>
+    <div class="col-sm-10 studyevent-subject">
+        @Html.DisplayFor(vm => Model.Subject)
+    </div>
+</li>

@@ -1,0 +1,91 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.XtracurEventsSearchViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2>@Html.DisplayFor(x => Model.Title)</h2>
+
+@using (Html.BeginForm("Search", "XtracurEvents", FormMethod.Get))
+{
+    <div class="input-group">
+        @Html.TextBox("q", Model.QueryDisplayText, new { @class = "form-control", @placeholder = @Resources.SearchForEvents })
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </span>
+    </div>
+}
+
+@if (!Model.IsEmptyQuery)
+{
+    <div class="panel-group stats-panels" id="accordion">
+        @if (Model.ShowPast)
+        {
+            <div style="margin-top: 10px" class="text-center">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-alert disabled">@Resources.SearchEventsPast</button>
+                    @Html.ActionLink(Resources.SearchEventsUpcoming, "Search", "XtracurEvents", new { alias = Model.Alias, q = Model.QueryDisplayText, showPast = false, offset = (int?)null }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+        @if (Model.ShowUpcoming)
+        {
+            <div style="margin-top: 10px" class="text-center">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-alert disabled">@Resources.SearchEventsUpcoming</button>
+                    @Html.ActionLink(Resources.SearchEventsPast, "Search", "XtracurEvents", new { alias = Model.Alias, q = Model.QueryDisplayText, showPast = true, offset = (int?)null }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+
+        @if (!Model.Events.Any())
+        {
+            <div class="alert alert-warning" style="margin-top: 10px">@Resources.EventsNotFound</div>
+        }
+        else
+        {
+            <ul class="panel-collapse nopadding" style="margin-top: 10px">
+                @foreach (var timeEvent in Model.Events)
+                {
+                    @Html.Partial("~/Views/Shared/_XtracurEvent.cshtml", timeEvent)
+                }
+            </ul>
+
+            if (Model.ShowPager)
+            {
+                <div class="text-center">
+                    <ul class="pagination nomargin">
+                        @foreach (var pagerItem in Model.PagerItems)
+                        {
+                            if (!pagerItem.IsEnabled)
+                            {
+                                <li class="disabled">
+                                    <a href="#">@Html.DisplayFor(x => pagerItem.DisplayText)</a>
+                                </li>
+                            }
+                            else if (pagerItem.IsActive)
+                            {
+                                <li class="active">
+                                    <a href="#">@Html.DisplayFor(x => pagerItem.DisplayText)</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink(pagerItem.DisplayText, "Search", "XtracurEvents", new { alias = Model.Alias, q = Model.QueryDisplayText, offset = pagerItem.Offset, showPast = Model.ShowPast }, null)
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+}
+
+

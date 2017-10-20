@@ -1,0 +1,63 @@
+﻿@using SpbuEducation.TimeTable.BusinessObjects.Events
+@model SpbuEducation.TimeTable.Web.ViewModels.StudentGroupEventsAttestationViewModel
+
+@{
+    ViewBag.Title = Resources.SpbuTimetable;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2>@Html.DisplayFor(vm => Model.StudentGroupDisplayName)</h2>
+<h3>@Html.DisplayFor(vm => Model.TimeTableDisplayName)</h3>
+
+<div id="view-mode-panel" class="text-right">
+    @Html.ActionLink(Resources.allClasses, "Primary", "StudentGroupEvents") |
+
+    @if (Model.StudyEventsTimeTableKindCode == StudyEventsTimeTableKindCode.Attestation)
+    {
+        <span>@Resources.interimAttestation | </span>
+        @Html.ActionLink(Resources.finalAttestation, "Final", "StudentGroupEvents")
+    }
+    @if (Model.StudyEventsTimeTableKindCode == StudyEventsTimeTableKindCode.Final)
+    {
+        @Html.ActionLink(Resources.interimAttestation, "Attestation", "StudentGroupEvents")
+        <span> | @Resources.finalAttestation</span>
+    }
+</div>
+
+@if (!Model.StudyEventsMonths.Any())
+{
+    <div class="alert alert-warning">@Resources.NoEvents</div>
+}
+
+@{
+    int i = 1;
+}
+
+<div class="panel-group" id="accordion">
+    @foreach (var month in Model.StudyEventsMonths)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#month@(i)">
+                        @Html.DisplayFor(x => month.MonthDisplayText)
+                    </a>
+                </h4>
+            </div>
+            <ul id="month@(i)"
+                class="studyevents panel-collapse nopadding nomargin @(month.IsActive ? null : "collapse")">
+                @foreach (var studyEvent in month.MonthStudyEvents)
+                {
+                    <li class="common-list-item row">
+                        @Html.Partial("~/Views/Shared/_DateTime.cshtml", studyEvent.DateTime)
+                        @Html.Partial("~/Views/Shared/_EventSubject.cshtml", studyEvent)
+                        @Html.Partial("~/Views/Shared/_EventLocations.cshtml", studyEvent)
+                    </li>
+                }
+            </ul>
+        </div>
+        i++;
+    }
+</div>

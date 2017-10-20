@@ -1,0 +1,74 @@
+﻿@using SpbuEducation.TimeTable.Common.Web.ViewModels
+@model SpbuEducation.TimeTable.Web.ViewModels.EducatorEventsShowViewModel
+
+@{
+    ViewBag.Title = Model.EducatorDisplayText;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+<h2>@Html.DisplayFor(x => Model.Title)
+    <span style="font-size: large;">
+        <a href="@Url.Action("WeekExcel", "EducatorEvents", new {masterId = Model.EducatorMasterId, weekMonday = Model.WeekMonday})" style="float: right; margin-top: 10px;">
+            <i class="glyphicon glyphicon-cloud-download"></i> @Resources.download
+        </a>
+    </span>
+</h2>
+
+<div id="timetable-week-navigator">
+    @Html.ActionLink(Resources.previousWeek, "ShowWeek", "EducatorEvents",
+        new { masterId = Model.EducatorMasterId, weekMonday = Model.PreviousWeekMonday },
+        new { @class = "prev-week" })
+
+    @Html.ActionLink(Resources.nextWeek, "ShowWeek", "EducatorEvents",
+        new { masterId = Model.EducatorMasterId, weekMonday = Model.NextWeekMonday },
+        new { @class = "next-week" })
+
+    <div id="timetable-week-navigator-chosen-week">
+        <div style="position: relative">
+            <a href="javascript:void(0)"
+               id="week"
+               data-url="@Url.Action("ShowWeek", "EducatorEvents")"
+               data-weekmonday="@Model.WeekMonday">
+                <i class="glyphicon glyphicon-calendar">
+                </i>
+                <span>@Model.WeekDisplayText</span>
+            </a>
+            <input type="hidden" class="weektimepicker form-control" />
+            @if (Model.IsCurrentWeekReferenceAvailable)
+            {
+                <span>|</span> @Html.ActionLink(Resources.toStart, "ShowWeek", "EducatorEvents",
+            new { masterId = Model.EducatorMasterId, weekMonday = (DateTime?)null }, null)
+            }
+            <span>|</span> @Html.ActionLink(Resources.ToWholeSemester, "Show", "EducatorEvents",
+            new { masterId = Model.EducatorMasterId, next = (int?)null }, null)
+        </div>
+    </div>
+</div>
+
+<div class="panel-group stats-panels" id="accordion">
+    @if (!Model.EducatorEventsDays.Any())
+    {
+        <div class="alert alert-warning">@Resources.NoEvents</div>
+    }
+    @foreach (var day in Model.EducatorEventsDays)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    @Html.DisplayFor(x => day.DayString)
+                </h4>
+            </div>
+            <ul class="panel-collapse nopadding nomargin">
+                @foreach (var timeEvent in day.DayStudyEvents)
+                {
+                    <li class="common-list-item row">
+                        @Html.Partial("~/Views/Shared/_DateTime.cshtml", timeEvent.DateTime.TimeOnly())
+                        @Html.Partial("~/Views/Shared/_EventSubject.cshtml", timeEvent)
+                        @Html.Partial("~/Views/Shared/_EventLocations.cshtml", timeEvent)
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

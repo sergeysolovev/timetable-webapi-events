@@ -1,0 +1,248 @@
+﻿@using SpbuEducation.TimeTable.Common.Web.ViewModels
+@model IEventLocationsViewModel
+
+@{ 
+    var any = Model.EventLocations.Any();
+
+    // single location and single educator
+    var single = any &&
+        Model.EventLocations.Count() == 1 &&
+        Model.EventLocations.First().Educators.Count() == 1;
+
+    // multiple locations or multiple educators
+    var multiple = any && !single;
+}
+
+@if (single)
+{
+    var location = Model.EventLocations.First();
+    var educator = location.Educators.First();
+    <div class="col-sm-3 studyevent-locations">
+        <div class="with-icon"
+             title="@Model.LocationsTooltip"
+             data-toggle="tooltip"
+             data-placement="top"
+             data-container="body">
+            @if (location.HasGeographicCoordinates)
+            {
+                <i class="glyphicon glyphicon-map-marker"></i>
+                <div class="address-modal-btn"
+                     data-lat="@location.Latitude"
+                     data-lng="@location.Longitude"
+                     data-address="@location.DisplayName"
+                     data-name="@Model.Subject">
+                    <span class="hoverable link @Model.LocationsClassName">
+                        @location.DisplayName
+                    </span>
+                </div>
+            }
+            else
+            {
+                <i class="glyphicon glyphicon-map-marker"></i>
+                <div>
+                    <span class="hoverable moreinfo @Model.LocationsClassName">
+                        @location.DisplayName
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+
+    if (Model.ForEducator)
+    {
+        <div class="col-sm-3">
+            @foreach (var cu in Model.ContingentUnits)
+            {
+                <div class="with-icon">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <div>
+                        <span class="hoverable moreinfo @Model.ClassName"
+                              data-container="body"
+                              data-placement="top"
+                              data-toggle="tooltip"
+                              title="@cu.DivisionAndCourse">
+                            @cu.Name
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-3 studyevent-educators">
+            <div class="with-icon">
+                <i class="glyphicon glyphicon-user"></i>
+                <div>
+                    <span class="hoverable @Model.EducatorsClassName"
+                          title="@Model.EducatorsTooltip"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          data-container="body">
+                        @if (educator.Id != null)
+                        {
+                            <span class="link">
+                                @Html.ActionLink(
+                                        educator.Name,
+                                        "Show",
+                                        "EducatorEvents",
+                                        new { masterId = educator.Id },
+                                        new { })
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="moreinfo">@educator.Name</span>
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (multiple)
+{
+    <div class="col-sm-3 studyevent-multiple-locations">
+        <div class="with-icon">
+            <i class="glyphicon glyphicon-map-marker"></i>
+            <div class="locations-educators-modal-btn"
+                 data-name="@Model.Subject"
+                 data-time="@Model.DateTime.AsString()">
+                <span class="hoverable link @Model.LocationsClassName"
+                      title="@Model.LocationsTooltip"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      data-container="body">
+                    @Model.LocationsDisplayText
+                </span>
+            </div>
+        </div>
+    </div>
+
+    if (Model.ForEducator)
+    {
+        <div class="col-sm-3">
+            @foreach (var cu in Model.ContingentUnits)
+            {
+                <div class="with-icon">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <div>
+                        <span class="hoverable moreinfo @Model.ClassName"
+                              data-container="body"
+                              data-placement="top"
+                              data-toggle="tooltip"
+                              title="@cu.DivisionAndCourse">
+                            @cu.Name
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-3 studyevent-educators">
+            <div class="with-icon">
+                <i class="glyphicon glyphicon-user"></i>
+                <div class="locations-educators-modal-btn"
+                     data-name="@Model.Subject"
+                     data-time="@Model.DateTime.AsString()">
+                    <span class="hoverable link @Model.EducatorsClassName"
+                          title="@Model.EducatorsTooltip"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          data-container="body">
+                        @Model.EducatorsDisplayText
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="studyevent-location-educator-modal hidden">
+        <div class="location-educator-table">
+            @foreach (var location in Model.EventLocations)
+            {
+                var i = 0;
+                var educators = location.Educators.ToArray();
+                var anyEducators = educators.Any();
+
+                do
+                {
+                    var educator = anyEducators ? educators[i] : null;
+                    var highlightRowClass = (Model.EducatorId != null && educator != null && educator.Id == Model.EducatorId)
+                        ? "highlight-row"
+                        : null;
+
+                    <div class="common-list-item row @highlightRowClass">
+                        <div class="col-sm-6">
+                            <div class="with-icon">
+                                @if (location.HasGeographicCoordinates)
+                                {
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <div class="address-modal-btn"
+                                         data-lat="@location.Latitude"
+                                         data-lng="@location.Longitude"
+                                         data-address="@location.DisplayName"
+                                         data-name="@Model.Subject">
+                                        <span class="hoverable link"
+                                              title="@Model.LocationsTooltip"
+                                              data-toggle="tooltip"
+                                              data-container="body"
+                                              data-placement="top">
+                                            @location.DisplayName
+                                        </span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <div>
+                                        <span class="hoverable @Model.LocationsClassName">
+                                            @location.DisplayName
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            @if (i < educators.Length)
+                            {
+                                <div class="with-icon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <div>
+                                        <span class="hoverable"
+                                              title="@Model.EducatorsTooltip"
+                                              data-toggle="tooltip"
+                                              data-container="body"
+                                              data-placement="top">
+                                            @if (educator.Id != null)
+                                            {
+                                                <span class="link">
+                                                    @Html.ActionLink(
+                                                        educator.Name,
+                                                        "Show",
+                                                        "EducatorEvents",
+                                                        new { masterId = educator.Id },
+                                                        new { })
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="moreinfo">@educator.Name</span>
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    i++;
+                }
+                while (i < educators.Length);
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,93 @@
+﻿@using Microsoft.Ajax.Utilities
+@model SpbuEducation.TimeTable.Common.Web.ViewModels.XtracurEventItemViewModel
+
+@{
+    var hiddenHtmlClass = Model.IsShowImmediateHidden ? "hidden" : "";
+    <li class="common-list-item row @hiddenHtmlClass">
+        <div class="tile xtracur-event-row"
+             data-contents-url='@Url.Action("GetModalContents", "XtracurEvents", new {
+                              eventId = Model.Id,
+                              recurrenceIndex = Model.RecurrenceIndex })'
+             data-this-url='@Url.Action("Index", "XtracurEvents", new {
+                          alias = Model.DivisionAlias,
+                          fromDate = Model.FromDateString,
+                          showImmediateEventId = Model.Id,
+                          showImmediateRecurrenceIndex = Model.RecurrenceIndex })'
+             data-parent-url='@Url.Action("Index", "XtracurEvents", new {
+                            alias = Model.DivisionAlias,
+                            fromDate = Model.FromDateString,
+                            showImmediateEventId = (int?)null,
+                            showImmediateRecurrenceIndex = (int?)null })'
+             data-show-immediate="@Model.ShowImmediate">
+            <div class="col-sm-2 studyevent-datetime">
+                <div class="with-icon">
+                    @if (!Model.HasTheSameTimeAsPreviousItem)
+                    {
+                        <i class="glyphicon glyphicon-time"></i>
+                        <div>
+                            <span class="@Model.ClassName">
+                                @Model.DisplayDateAndTimeIntervalString
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (Model.ShowYear)
+            {
+                <div class="col-sm-1">
+                    <span class="@Model.ClassName">@Model.Year</span>
+                </div>
+                <div class="col-sm-2 studyevent-subject">
+                    <span class="@Model.ClassName">@Model.Subject</span>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-3 studyevent-subject">
+                    <span class="@Model.ClassName">@Model.Subject</span>
+                </div>
+            }
+            <div class="col-sm-4 studyevent-locations">
+                @if (!Model.Location.IsEmpty)
+                {
+                    <div class="with-icon">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                        <span class="@Model.ClassName">@Model.Location.DisplayName</span>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-2 studyevent-educators">
+                @if (!Model.EducatorsDisplayText.IsNullOrWhiteSpace())
+                {
+                    <div class="with-icon">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <div>
+                            <span class="@Model.ClassName">@Model.EducatorsDisplayText</span>
+                        </div>
+                    </div>
+                }
+                else if (!Model.ResponsiblePersonContacts.IsNullOrWhiteSpace())
+                {
+                    <div class="with-icon">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <div>
+                            <span class="@Model.ClassName">@Model.ResponsiblePersonContacts</span>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-1">
+                @if (Model.HasAgenda)
+                {
+                    <div class="with-icon pull-right">
+                        <i class="glyphicon glyphicon-th-list"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           title="@Resources.HasAgenda">
+                        </i>
+                    </div>
+                }
+            </div>
+        </div>
+    </li>
+}

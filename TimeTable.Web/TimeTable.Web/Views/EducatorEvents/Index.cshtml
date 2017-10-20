@@ -1,0 +1,67 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.EducatorEventsIndexViewModel
+
+@{
+    ViewBag.Title = Resources.TimetablesForEducators;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+<h2>@Resources.TimetablesForEducators</h2>
+
+@using (Html.BeginForm("Index", "EducatorEvents", FormMethod.Get))
+{
+    <div class="input-group">
+        @Html.TextBox("q", Model.EducatorLastNameQuery,
+            new { @class = "form-control", @placeholder = Resources.SearchEducatorByLastname })
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">@Resources.Search</button>
+        </span>
+    </div>
+}
+
+<div style="margin-top: 20px">
+    @if (Model.Educators != null)
+    {
+        if (!Model.Educators.Any())
+        {
+            <div class="alert alert-warning">@Resources.EducatorNotFound</div>
+        }
+        else
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse">@Resources.Educators</a>
+                    </h4>
+                </div>
+                <ul class="nopadding nomargin">
+                    @foreach (var educator in Model.Educators)
+                    {
+                        <div class="tile" onclick="window.location.href='@Url.Action("Show", "EducatorEvents",
+                                new { masterId = educator.Id, next = (int?)null })'">
+                            <li class="common-list-item row">
+                                <div class="col-sm-3">
+                                    @Html.DisplayFor(x => educator.FullName)
+                                </div>
+                                <div class="col-sm-2">
+                                    @foreach (var employment in educator.Employments)
+                                    {
+                                        @Html.DisplayFor(x => employment.Position)
+                                        <br />
+                                    }
+                                </div>
+                                <div class="col-sm-7">
+                                    @foreach (var employment in educator.Employments)
+                                    {
+                                        @Html.DisplayFor(x => employment.Department)
+                                        <br />
+                                    }
+                                </div>
+                            </li>
+                        </div>
+                    }
+                </ul>
+            </div>
+        }
+    }
+</div>

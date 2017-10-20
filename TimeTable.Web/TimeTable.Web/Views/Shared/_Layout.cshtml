@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<html>
+    <head>
+        @Html.Partial("~/Views/Shared/_Head.cshtml")
+    </head>
+    <body>
+        <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <a href="/" id="navbar-back-button" class="visible-xs-*">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+                <div class="locale-switcher">
+                    @Html.Partial("~/Views/Shared/_Culture.cshtml")
+                </div>
+                <div class="navbar-header" id="navbar-header">
+                    <a href="~/" class="navbar-brand">@Resources.SpbuTimetable</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            @RenderBody()
+            <script async src="data:text/plain;base64,Zm9yKHZhciBhPWRvY3VtZW50LmdldEVsZW1lbnRzQnlDbGFzc05hbWUoImxvY2F0aW9ucy1lZHVjYXRvcnMtbW9kYWwtYnRuIiksYj0wO2I8YS5sZW5ndGg7YisrKXt2YXIgYz1hW2JdLnF1ZXJ5U2VsZWN0b3IoInNwYW4iKSxkPWMuaW5uZXJUZXh0LnRyaW0oKTs2MDxkLmxlbmd0aCYmKGMuaW5uZXJUZXh0PWQuc3Vic3RyKDAsNjApKyIgLi4uIil9Ow=="></script>
+        </div>
+        <script defer src="@ViewBag.Assets.Get("main.js")"></script>
+    </body>
+</html>

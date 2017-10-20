@@ -1,0 +1,87 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.DivisionShowViewModel
+
+@{
+    ViewBag.Title = Resources.StudyPrograms;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2>@Html.DisplayFor(vm => Model.Title)</h2>
+<h3>@Html.DisplayFor(vm => Model.StudyProgramsTitle)</h3>
+
+@{
+    int i = 1;
+}
+
+<div class="panel-group" id="accordion">
+    @foreach (var studyProgramLevel in Model.StudyProgramLevels)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#studyProgramLevel@(i)">
+                        @Html.DisplayFor(x => studyProgramLevel.StudyLevelName)
+                    </a>
+                </h4>
+            </div>
+            <ul id="studyProgramLevel@(i)" class="panel-collapse collapse nopadding nomargin">
+                <li class="common-list-item row">
+                    <div class="col-sm-5"><strong>@Resources.StudyProgram</strong></div>
+                    <div class="col-sm-7"><strong>@Resources.YearsOfAdmission</strong></div>
+                </li>
+                @foreach (var studyProgramCombination in studyProgramLevel.StudyProgramCombinations)
+                {
+                    <li class="common-list-item row">
+                        <div class="col-sm-5">
+                            @Html.DisplayFor(x => studyProgramCombination.Name)
+                        </div>
+
+                        @if (Model.Alias == "BIOL" && studyProgramLevel.IsMagistery && studyProgramCombination.IsBiology)
+                        {
+                            <div class="col-sm-6">
+                                @Html.RouteLink(
+                                    linkText: Resources.AllYears,
+                                    routeName: "XtracurEvents.Index",
+                                    routeValues: new { alias = "BIOL" })
+                            </div>
+                        }
+                        else
+                        {
+                            for (int j = 0; j < studyProgramCombination.AdmissionYears.Count && j < 7; j++)
+                            {
+                                var alias = studyProgramCombination.AdmissionYears[j].PublicDivisionAlias;
+                                var yearName = studyProgramCombination.AdmissionYears[j].YearName;
+                                var ids = studyProgramCombination.AdmissionYears[j].StudyProgramIds.ToList();
+
+                                if (ids.Count == 1)
+                                {
+                                    <div class="col-sm-1">
+                                        @Html.RouteLink(
+                                            linkText: yearName,
+                                            routeName: "StudyProgram.Show",
+                                            routeValues: new { publicDivisionAlias = alias, id = ids.First() })
+                                    </div>
+                                }
+                                else if (ids.Count > 1)
+                                {
+                                    <div class="col-sm-1">
+                                        @using (Html.BeginRouteForm("StudyProgram.Show", new { publicDivisionAlias = alias }, FormMethod.Get))
+                                        {
+                                            foreach (var id in ids)
+                                            {
+                                                <input type="hidden" name="id" value="@id" />
+                                            }
+                                            <input type="submit" class="btn btn-link nopadding" value="@yearName" />
+                                        }
+                                    </div>
+                                }
+                            }
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+                i++;
+    }
+</div>

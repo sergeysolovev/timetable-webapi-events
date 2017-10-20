@@ -1,0 +1,101 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.EducatorEventsShowAllViewModel
+
+@{
+    ViewBag.Title = Model.EducatorDisplayText;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+<h2>
+    @Html.DisplayFor(x => Model.Title)
+    <span style="font-size: large;">
+    <a href="@Url.Action("Excel", "EducatorEvents", new {masterId = Model.EducatorMasterId, next = Model.Next})" style="float: right; margin-top: 10px;">
+        <i class="glyphicon glyphicon-cloud-download"></i> @Resources.download
+    </a>
+    </span>
+</h2>
+
+<div id="timetable-week-navigator">
+    @if (Model.IsSpringTerm)
+    {
+        if (Model.SpringTermLinkAvailable)
+        {
+            @Html.ActionLink("‹ " + Resources.ToSpringSemester, "Show", "EducatorEvents",
+                new { masterId = Model.EducatorMasterId, next = (int?)null },
+                new { @class = "prev-week" })
+        }
+        else
+        {
+            <p class="prev-week">@Resources.ToSpringSemester</p>
+        }
+        if (Model.AutumnTermLinkAvailable)
+        {
+            @Html.ActionLink(Resources.toAutumnSemester + " ›", "Show", "EducatorEvents",
+                new { masterId = Model.EducatorMasterId, next = (int?)1 },
+                new { @class = "next-week" })
+        }
+        else
+        {
+            <p class="next-week">@Resources.toAutumnSemester</p>
+        }
+    }
+    else
+    {
+        if (Model.AutumnTermLinkAvailable)
+        {
+            @Html.ActionLink("‹ " + Resources.toAutumnSemester, "Show", "EducatorEvents",
+                new { masterId = Model.EducatorMasterId, next = (int?)null },
+                new { @class = "prev-week" })
+        }
+        else
+        {
+            <p class="prev-week">@Resources.toAutumnSemester</p>
+        }
+        if (Model.SpringTermLinkAvailable)
+        {
+            @Html.ActionLink(Resources.ToSpringSemester + " ›", "Show", "EducatorEvents",
+                new { masterId = Model.EducatorMasterId, next = (int?)1 },
+                new { @class = "next-week" })
+        }
+        else
+        {
+            <p class="next-week">@Resources.ToSpringSemester</p>
+        }
+    }
+    <div id="timetable-week-navigator-chosen-week">
+        @Html.DisplayFor(x => Model.DateRangeDisplayText)
+        <span>|</span>
+        @Html.ActionLink(Resources.ToCurrentWeek, "ShowWeek", "EducatorEvents", new { masterId = Model.EducatorMasterId, month = (DateTime?)null }, null)
+    </div>
+</div>
+
+<div class="panel-group stats-panels" id="accordion">
+    @if (!Model.HasEvents)
+    {
+        <div class="alert alert-warning">@Resources.NoEvents</div>
+    }
+    else
+    {
+        foreach (var day in Model.EducatorEventsDays)
+        {
+            if (day.DayStudyEventsCount > 0)
+            {
+                <div class="panel panel-default" style="overflow: visible">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">@day.DayString</h4>
+                    </div>
+                    <ul class="panel-collapse nopadding nomargin">
+                        @foreach (var studyEvent in day.DayStudyEvents)
+                        {
+                            <li class="common-list-item row">
+                                @Html.Partial("~/Views/Shared/_DateTime.cshtml", studyEvent.DateTime)
+                                @Html.Partial("~/Views/Shared/_EventSubject.cshtml", studyEvent)
+                                @Html.Partial("~/Views/Shared/_EventLocations.cshtml", studyEvent)
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    }
+</div>

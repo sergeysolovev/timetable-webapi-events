@@ -1,0 +1,71 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.HomeIndexViewModel
+
+@{
+    ViewBag.Title = Resources.SpbuTimetable;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2>@Resources.Timetables</h2>
+
+<div class="row">
+    <div class="col-sm-6" style="padding-left: 0">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.Divisions</div>
+            <ul class="list-group">
+                @foreach (var item in Model.Divisions)
+                {
+                    <li class="list-group-item">
+                        @Html.ActionLink(item.Name, "Show", "Division", new { alias = item.Alias }, null)
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6" style="padding-right: 0">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.TimetablesForEducators</div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink(Resources.SearchEducator, "Index", "EducatorEvents", new { }, null)
+                </li>
+            </ul>
+        </div>
+    </div>
+    @if (Model.XtracurDivisions.Any())
+    {
+        <div class="col-sm-6" style="padding-right: 0">
+            <div class="panel panel-default">
+                <div class="panel-heading">@Resources.Extracurricular</div>
+                <ul class="list-group">
+                @foreach (var xtracurDivision in Model.XtracurDivisions)
+                {
+                    <li class="list-group-item">
+                        @Html.ActionLink(xtracurDivision.Name, "Index", "XtracurEvents",
+                        new { alias = xtracurDivision.Alias, month = (DateTime?)null }, null)
+                    </li>
+                }
+                </ul>
+            </div>
+        </div>
+    }
+    @if (Model.PhysTrainingDivisions.Any())
+    {
+        <div class="col-sm-6" style="padding-right: 0">
+            <div class="panel panel-default">
+                <div class="panel-heading">@Resources.PhysTraining</div>
+                <ul class="list-group">
+                    @foreach (var physTrainingDivision in Model.PhysTrainingDivisions)
+                {
+                        <li class="list-group-item">
+                            @Html.ActionLink(physTrainingDivision.Name, "Index", "XtracurEvents",
+                        new { alias = physTrainingDivision.Alias, month = (DateTime?)null }, null)
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+

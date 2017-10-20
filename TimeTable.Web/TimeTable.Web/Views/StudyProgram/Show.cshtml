@@ -1,0 +1,63 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.StudyProgramShowViewModel
+
+@{
+    ViewBag.Title = Resources.StudyProgramTimetables;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<h2>@Html.DisplayFor(x => Model.StudyProgramDisplayText)</h2>
+<h3>@Html.DisplayFor(x => Model.AdmissionYearText)</h3>
+
+<div class="panel-group" id="accordion">
+    @if (Model.StudentGroupsForPreviousStudyYear.Any())
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#studentGroupsForPreviousYear">
+                        @Resources.IntermediaryAttestationForPrevious @Html.DisplayFor(x => Model.PreviousStudyYearDisplayText)
+                    </a>
+                </h4>
+            </div>
+            <ul id="studentGroupsForPreviousYear" class="panel-collapse collapse nopadding nomargin">
+                @foreach (var studentGroup in Model.StudentGroupsForPreviousStudyYear)
+                {
+                    <li class="common-list-item row">
+                        <div class="tile" onclick="window.location.href='@Url.Action("Attestation", "StudentGroupEvents",
+                            new { publicDivisionAlias = Model.PublicDivisionAlias, studentGroupId = studentGroup.StudentGroupId })'">
+                            <div class="col-sm-4">
+                                @Html.DisplayFor(x => studentGroup.StudentGroupName)
+                            </div>
+                            <div class="col-sm-3">
+                                @Html.DisplayFor(x => studentGroup.StudentGroupStudyForm)
+                            </div>
+                            <div class="col-sm-3">
+                                @Html.DisplayFor(x => studentGroup.StudentGroupProfiles)
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>    
+    }
+    @if (Model.StudentGroupsForCurrentStudyYear.Any())
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#studentGroupsForCurrentYear">
+                        @Resources.Current @Html.DisplayFor(x => Model.CurrentStudyYearDisplayText)
+                    </a>
+                </h4>
+            </div>
+            <ul id="studentGroupsForCurrentYear" class="panel-collapse nopadding nomargin">
+                @foreach (var studentGroup in Model.StudentGroupsForCurrentStudyYear)
+                {
+                    @Html.Partial("~/Views/Shared/_StudentGroupItem.cshtml", studentGroup)
+                }
+            </ul>
+        </div>
+    }
+</div>

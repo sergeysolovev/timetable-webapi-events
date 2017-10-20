@@ -1,0 +1,12 @@
+﻿@{
+    if(!Request["culture"].IsEmpty()){
+        Culture = UICulture = Request["culture"];
+    }
+}
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>@ViewBag.Title</title>
+<link href="@ViewBag.Assets.Get("static\\media\\favicon.ico")" rel="icon">
+<link href="@ViewBag.Assets.Get("main.css")" rel="stylesheet">

@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web", "TimeTable.Web\TimeTable.Web.csproj", "{F613EE86-7E55-4DB9-A7B0-D675FB282272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Module", "..\TimeTable.Module\TimeTable.Module\TimeTable.Module.csproj", "{ED179A26-7CE5-4309-A8FC-D08BFDDFAF75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C70D3EB-0304-4A53-8F05-856314BA0520}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Common", "..\TimeTable.Common\TimeTable.Common\TimeTable.Common.csproj", "{9BB3F426-ED75-458C-A537-903F9772513C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web.Api.v1", "TimeTable.Web.Api.v1\TimeTable.Web.Api.v1.csproj", "{E9CBF7EB-DA2B-41CC-A156-E1164AE3C361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web.Api.v1.Domain.Services.Xpo", "TimeTable.Web.Api.v1.Domain.Services.Xpo\TimeTable.Web.Api.v1.Domain.Services.Xpo.csproj", "{6EB465E7-2446-4F91-9660-7656F28D8E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web.Api.v1.Localization", "TimeTable.Web.Api.v1.Localization\TimeTable.Web.Api.v1.Localization.csproj", "{F6927F94-24A9-4409-9E58-12EA554AA852}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web.Api.v1.DataContracts", "TimeTable.Web.Api.v1.DataContracts\TimeTable.Web.Api.v1.DataContracts.csproj", "{ED76EFD2-BF2C-4F3F-B8CF-1A3D1D43FE70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTable.Web.Api.v1.Domain.Services.Abstractions", "TimeTable.Web.Api.v1.Domain.Services.Abstractions\TimeTable.Web.Api.v1.Domain.Services.Abstractions.csproj", "{E648C5DF-20AF-4C10-8133-F8E6FA7BA88F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F613EE86-7E55-4DB9-A7B0-D675FB282272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F613EE86-7E55-4DB9-A7B0-D675FB282272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F613EE86-7E55-4DB9-A7B0-D675FB282272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F613EE86-7E55-4DB9-A7B0-D675FB282272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED179A26-7CE5-4309-A8FC-D08BFDDFAF75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED179A26-7CE5-4309-A8FC-D08BFDDFAF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED179A26-7CE5-4309-A8FC-D08BFDDFAF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED179A26-7CE5-4309-A8FC-D08BFDDFAF75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB3F426-ED75-458C-A537-903F9772513C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB3F426-ED75-458C-A537-903F9772513C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB3F426-ED75-458C-A537-903F9772513C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB3F426-ED75-458C-A537-903F9772513C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9CBF7EB-DA2B-41CC-A156-E1164AE3C361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9CBF7EB-DA2B-41CC-A156-E1164AE3C361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9CBF7EB-DA2B-41CC-A156-E1164AE3C361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9CBF7EB-DA2B-41CC-A156-E1164AE3C361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB465E7-2446-4F91-9660-7656F28D8E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB465E7-2446-4F91-9660-7656F28D8E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB465E7-2446-4F91-9660-7656F28D8E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB465E7-2446-4F91-9660-7656F28D8E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6927F94-24A9-4409-9E58-12EA554AA852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6927F94-24A9-4409-9E58-12EA554AA852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6927F94-24A9-4409-9E58-12EA554AA852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6927F94-24A9-4409-9E58-12EA554AA852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED76EFD2-BF2C-4F3F-B8CF-1A3D1D43FE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED76EFD2-BF2C-4F3F-B8CF-1A3D1D43FE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED76EFD2-BF2C-4F3F-B8CF-1A3D1D43FE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED76EFD2-BF2C-4F3F-B8CF-1A3D1D43FE70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E648C5DF-20AF-4C10-8133-F8E6FA7BA88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E648C5DF-20AF-4C10-8133-F8E6FA7BA88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E648C5DF-20AF-4C10-8133-F8E6FA7BA88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E648C5DF-20AF-4C10-8133-F8E6FA7BA88F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC330E18-ADF3-4DEB-8910-5554A9649D84}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://spbgu.visualstudio.com/
+		SccProjectUniqueName0 = ..\\TimeTable.Module\\TimeTable.Module\\TimeTable.Module.csproj
+		SccProjectName0 = ../TimeTable.Module/TimeTable.Module
+		SccLocalPath0 = ..\\TimeTable.Module\\TimeTable.Module
+		SccProjectUniqueName1 = ..\\TimeTable.Common\\TimeTable.Common\\TimeTable.Common.csproj
+		SccProjectName1 = ../TimeTable.Common/TimeTable.Common
+		SccLocalPath1 = ..\\TimeTable.Common\\TimeTable.Common
+		SccProjectUniqueName2 = TimeTable.Web\\TimeTable.Web.csproj
+		SccProjectName2 = TimeTable.Web
+		SccLocalPath2 = TimeTable.Web
+		SccLocalPath3 = .
+		SccProjectUniqueName4 = TimeTable.Web.Api.v1.Domain.Services.Xpo\\TimeTable.Web.Api.v1.Domain.Services.Xpo.csproj
+		SccProjectName4 = TimeTable.Web.Api.v1.Domain.Services.Xpo
+		SccLocalPath4 = TimeTable.Web.Api.v1.Domain.Services.Xpo
+		SccProjectUniqueName5 = TimeTable.Web.Api.v1\\TimeTable.Web.Api.v1.csproj
+		SccProjectName5 = TimeTable.Web.Api.v1
+		SccLocalPath5 = TimeTable.Web.Api.v1
+		SccProjectUniqueName6 = TimeTable.Web.Api.v1.DataContracts\\TimeTable.Web.Api.v1.DataContracts.csproj
+		SccProjectName6 = TimeTable.Web.Api.v1.DataContracts
+		SccLocalPath6 = TimeTable.Web.Api.v1.DataContracts
+		SccProjectUniqueName7 = TimeTable.Web.Api.v1.Localization\\TimeTable.Web.Api.v1.Localization.csproj
+		SccProjectName7 = TimeTable.Web.Api.v1.Localization
+		SccLocalPath7 = TimeTable.Web.Api.v1.Localization
+		SccProjectUniqueName8 = TimeTable.Web.Api.v1.Domain.Services.Abstractions\\TimeTable.Web.Api.v1.Domain.Services.Abstractions.csproj
+		SccProjectName8 = TimeTable.Web.Api.v1.Domain.Services.Abstractions
+		SccLocalPath8 = TimeTable.Web.Api.v1.Domain.Services.Abstractions
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,19 @@
+﻿@model SpbuEducation.TimeTable.Common.Web.Breadcrumb.Breadcrumb
+
+<ol class="breadcrumb">
+    @foreach (var item in Model)
+    {
+        if (item.IsActive)
+        {
+            <li class="active">
+                @Html.DisplayFor(x => item.DisplayText)
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink(item.DisplayText, item.ActionName, item.ControllerName, item.RouteValues, item.HtmlAttributes)
+            </li>
+        }
+    }
+</ol>

@@ -1,0 +1,74 @@
+﻿@model SpbuEducation.TimeTable.Web.ViewModels.XtracurEventsIndexMonthViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/_Breadcrumb.cshtml", Model.Breadcrumb)
+
+<div style="float: right; width: 30%; margin-bottom: 0; margin-top: 4px">
+    @using (Html.BeginForm("Search", "XtracurEvents", FormMethod.Get))
+    {
+        <div class="input-group input-group-sm">
+            @Html.TextBox("q", "", new { @class = "form-control", @placeholder = @Resources.SearchForEvents })
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    }
+</div>
+<h2>@Html.DisplayFor(x => Model.Title)</h2>
+
+<div id="timetable-week-navigator">
+    @Html.ActionLink(Model.PreviousMonthDisplayText, "Index", "XtracurEvents",
+        new { fromDate = Model.PreviousMonthDate, alias = Model.Alias },
+        new { @class = "prev-week" })
+
+    @Html.ActionLink(Model.NextMonthDisplayText, "Index", "XtracurEvents",
+        new { fromDate = Model.NextMonthDate, alias = Model.Alias },
+        new { @class = "next-week" })
+    
+    <div id="timetable-week-navigator-chosen-week">
+        @Html.DisplayFor(vm => vm.ChosenMonthDisplayText)
+        @if (Model.IsCurrentMonthReferenceAvailable)
+        {
+            <span>|</span> @Html.ActionLink(Resources.toCurrentMonth, "Index", "XtracurEvents",
+            new { fromDate = (DateTime?)null, alias = Model.Alias  }, null)
+        }
+    </div>
+</div>
+
+<div class="panel-group stats-panels" id="accordion">
+    @if (!Model.HasEventsToShow)
+    {
+        <div class="alert alert-warning">@Resources.NoEvents</div>
+    }
+    @if (Model.ShowGroupingCaptions)
+    {
+        foreach (var grouping in Model.EventGroupings)
+        {
+            <h5>@Html.DisplayFor(vm => grouping.Caption)</h5>
+            <ul class="panel-collapse nopadding subkindmargin">
+                @foreach (var timeEvent in grouping.Events)
+                {
+                    @Html.Partial("~/Views/Shared/_XtracurEvent.cshtml", timeEvent)
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        foreach (var grouping in Model.EventGroupings)
+        {
+            <ul class="panel-collapse nopadding subkindmargin">
+                @foreach (var timeEvent in grouping.Events)
+                {
+                    @Html.Partial("~/Views/Shared/_XtracurEvent.cshtml", timeEvent)
+                }
+            </ul>
+        }
+    }
+</div>
