@@ -32,7 +32,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
         public class EventContract
         {
             /// <summary>
-            /// Student's Group Id
+            /// Event Id
             /// </summary>
             public int Id { get; set; }
 
