@@ -24,99 +24,100 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
         /// <summary>
         /// List of Events
         /// </summary>
-        public IEnumerable<EventDataContract> Event { get; set; }
+        public IEnumerable<EventContract> Events { get; set; }
+
         /// <summary>
         /// Event Data Contract
         /// </summary>
-        public class EventDataContract
+        public class EventContract
         {
             /// <summary>
-            /// Student's Group Id
+            /// Event Id
             /// </summary>
-            [JsonProperty("StudentGroupId")]
             public int Id { get; set; }
 
             /// <summary>
-            /// Display Name
+            /// Start
             /// </summary>
-            [JsonProperty("StudentGroupDisplayName")]
-            public string DisplayName { get; set; }
+            public DateTime Start { get; set; }
 
             /// <summary>
-            /// Events 
+            /// End
             /// </summary>
-            public IEnumerable<EventContract> Events { get; set; }
+            public DateTime End { get; set; }
 
             /// <summary>
-            /// Event Data Contract
+            /// Subject
             /// </summary>
-            public class EventContract
+            public string Subject { get; set; }
+
+            /// <summary>
+            /// Determines whether event is cancelled
+            /// </summary>
+            public bool IsCancelled { get; set; }
+
+            /// <summary>
+            /// Timetable kind code (from view model)
+            /// </summary>
+            [JsonProperty("Timetable")]
+            public int? TimetableKindCode;
+
+            /// <summary>
+            /// Group Id
+            /// </summary>
+            public string GroupId { get; set; }
+
+            /// <summary>
+            /// Division Id
+            /// </summary>
+            public string DivisionId { get; set; }
+
+            /// <summary>
+            /// Determines whether the event was assigned
+            /// after all the events have been planned
+            /// </summary>
+            public bool IsAssigned { get; set; }
+
+            /// <summary>
+            /// Determines whether event's time was changed
+            /// </summary>
+            public bool TimeWasChanged { get; set; }
+
+            /// <summary>
+            /// Determines whether event's locations were changed
+            /// </summary>
+            public bool LocationsWereChanged { get; set; }
+
+            /// <summary>
+            /// Determines whether event's educators were substituted
+            /// </summary>
+            public bool EducatorsWereReassigned { get; set; }
+
+
+            /// <summary>
+            /// Determines whether event is elective
+            /// </summary>
+            public bool IsFacultative { get; set; }
+
+            /// <summary>
+            /// Event's locations
+            /// </summary>
+            public IEnumerable<EventLocationContract> EventLocations { get; set; }
+
+            /// <summary>
+            /// Event Location Data Contract
+            /// </summary>
+            public class EventLocationContract
             {
                 /// <summary>
-                /// Start
+                /// Latitude
                 /// </summary>
-                public DateTime Start { get; set; }
+                public double Latitude { get; set; }
 
                 /// <summary>
-                /// End
+                /// Longitude
                 /// </summary>
-                public DateTime End { get; set; }
-
-                /// <summary>
-                /// Subject
-                /// </summary>
-                public string Subject { get; set; }
-
-                /// <summary>
-                /// Determines whether event is cancelled
-                /// </summary>
-                public bool IsCancelled { get; set; }
-
-                /// <summary>
-                /// Timetable kind code (from view model)
-                /// </summary>
-                public int? StudyEventsTimeTableKindCode;
-
-                /// <summary>
-                /// Contingent Unit's Name (from view model)
-                /// </summary>
-                public string ContingentUnitName { get; set; }
-
-                /// <summary>
-                /// Division Id
-                /// </summary>
-                public string DivisionId { get; set; }
-                /// <summary>
-                /// Determines whether the event was assigned
-                /// after all the events have been planned
-                /// </summary>
-                public bool IsAssigned { get; set; }
-
-                /// <summary>
-                /// Determines whether event's time was changed
-                /// </summary>
-                public bool TimeWasChanged { get; set; }
-
-                /// <summary>
-                /// Determines whether event's locations were changed
-                /// </summary>
-                public bool LocationsWereChanged { get; set; }
-
-                /// <summary>
-                /// Determines whether event's educators were substituted
-                /// </summary>
-                public bool EducatorsWereReassigned { get; set; }
-
-
-                /// <summary>
-                /// Determines whether event is elective
-                /// </summary>
-                public bool IsFacultative { get; set; }
-
-                /// <summary>
-                /// Event's locations
-                /// </summary>
-                public IEnumerable<EventLocationContract> EventLocations { get; set; }
+                public double Longitude { get; set; }
 
 
             }
