@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
+﻿namespace SpbuEducation.TimeTable.Web.Api.v1.DataContracts
 {
+    /// <summary>
+    /// TimetableKindCode
+    /// </summary>
     public enum TimeTableKindСode
         {		
            /// <summary>		
