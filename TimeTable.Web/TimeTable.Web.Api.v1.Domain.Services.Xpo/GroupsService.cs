@@ -19,6 +19,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
         private readonly EducatorIdTupleMapper educatorIdMapper;
         private readonly ContingentDivisionCourseMapper contingentDivCourseMapper;
         private readonly LanguageCode language;
+        private readonly TimeTableKindCodeMapper timetableMapper;
 
         public GroupsService(
             GroupRepository groupRepository,
@@ -38,11 +39,11 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
 
             this.contingentDivCourseMapper = contingentDivCourseMapper ??
                 throw new ArgumentNullException(nameof(contingentDivCourseMapper));
-
+            
             language = locale.Language;
         }
 
-        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null)
+        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode? timeTableKind = default(TimeTableKindСode?))
         {
             var group = groupRepository.Get(id);
 
@@ -56,6 +57,11 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var to = fromValue.AddDays(7);
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
+
+            if (timeTableKind != null)
+            {
+                var timetableKindCode = timetableMapper.Map(timeTableKind);
+            }
 
             var contract = new GroupEventsContract
             {
