@@ -20,12 +20,15 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
         private readonly ContingentDivisionCourseMapper contingentDivCourseMapper;
         private readonly LanguageCode language;
         private readonly TimeTableKindCodeMapper timetableMapper;
+        private readonly TimetableKindRepository timetableKindRepository;
 
         public GroupsService(
             GroupRepository groupRepository,
             EventLocationMapper eventLocationMapper,
             EducatorIdTupleMapper educatorIdMapper,
             ContingentDivisionCourseMapper contingentDivCourseMapper,
+            TimetableKindRepository timetableKindRepository,
+            
             LocaleInfo locale)
         {
             this.groupRepository = groupRepository ??
@@ -39,11 +42,15 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
 
             this.contingentDivCourseMapper = contingentDivCourseMapper ??
                 throw new ArgumentNullException(nameof(contingentDivCourseMapper));
+            this.timetableKindRepository = timetableKindRepository ??
+                throw new ArgumentNullException(nameof(timetableKindRepository));
+            
+            
             
             language = locale.Language;
         }
 
-        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode? timeTableKind = default(TimeTableKindСode?))
+        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode timeTableKind = TimeTableKindСode.Unknown)
         {
             var group = groupRepository.Get(id);
 
@@ -58,9 +65,10 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
 
-            if (timeTableKind != null)
+            if (timeTableKind != TimeTableKindСode.Unknown)
             {
                 var timetableKindCode = timetableMapper.Map(timeTableKind);
+                var timetableKind = timetableKindRepository.Get(timetableKindCode);
             }
 
             var contract = new GroupEventsContract

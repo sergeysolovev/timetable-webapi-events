@@ -9,12 +9,10 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.Mappers
         public TimeTableKindCodeMapper()
                     { }
         
-                public StudyEventsTimeTableKindCode? Map(TimeTableKindСode? timetable)
+                public StudyEventsTimeTableKindCode Map(TimeTableKindСode timetable)
             {
                 switch (timetable)
                {
-                    case null:
-                        return null;
                     case TimeTableKindСode.Unknown:
                         return StudyEventsTimeTableKindCode.Unknown;
                     case TimeTableKindСode.Primary:

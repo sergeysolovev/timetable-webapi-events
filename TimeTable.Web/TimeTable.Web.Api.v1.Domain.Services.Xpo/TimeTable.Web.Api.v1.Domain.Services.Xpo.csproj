@@ -83,6 +83,7 @@
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\ProgramRepository.cs" />
     <Compile Include="Repositories\StudyYearRepository.cs" />
+    <Compile Include="Repositories\TimetableKindRepository.cs" />
     <Compile Include="Repositories\XpoRepository.cs" />
     <Compile Include="StudyDivisionsService.cs" />
   </ItemGroup>
