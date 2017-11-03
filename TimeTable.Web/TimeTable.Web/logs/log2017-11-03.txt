@@ -62,3 +62,22 @@ Cannot resolve parameter 'SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
    в System.Web.Http.Dispatcher.DefaultHttpControllerActivator.Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
    в System.Web.Http.Controllers.HttpControllerDescriptor.CreateController(HttpRequestMessage request)
    в System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+2017-11-03T12:40:31|Error|WebApi||RECTORAT\st044618|Ссылка на объект не указывает на экземпляр объекта.||||System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.GroupsService.GetWeekEvents(Int32 id, Nullable`1 from, TimeTableKindСode timeTableKind) в C:\Users\st044618\Source\Repos\timetable-webapi-events\TimeTable.Web\TimeTable.Web.Api.v1.Domain.Services.Xpo\GroupsService.cs:строка 68
+   в SpbuEducation.TimeTable.Web.Api.v1.Controllers.GroupsController.GetEvents(String id) в C:\Users\st044618\Source\Repos\timetable-webapi-events\TimeTable.Web\TimeTable.Web.Api.v1\Controllers\GroupsController.cs:строка 66
+   в lambda_method(Closure , Object , Object[] )
+   в System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   в System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   в System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()

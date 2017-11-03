@@ -14,7 +14,7 @@ api/v1/groups/{id}/events/{from}/{to}?timetable={timetable}
 	т.к методы 
 	
 	/api/v1/groups/{id}/events
-    /api/v1/groups/{id}/events
+    /api/v1/groups/{id}/events/from
 
 	Выглядят как единое целое, и 
 	
@@ -25,4 +25,4 @@ api/v1/groups/{id}/events/{from}/{to}?timetable={timetable}
 	и для описанных выше двух методов:
 
 	/api/v1/groups/{id}/events?timetable={timetable}
-	/api/v1/groups/{id}/events?timetable={timetable}
+	/api/v1/groups/{id}/events/from?timetable={timetable}

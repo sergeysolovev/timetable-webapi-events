@@ -28,6 +28,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             EducatorIdTupleMapper educatorIdMapper,
             ContingentDivisionCourseMapper contingentDivCourseMapper,
             TimetableKindRepository timetableKindRepository,
+            TimeTableKindCodeMapper timetableMapper,
             
             LocaleInfo locale)
         {
@@ -44,13 +45,15 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                 throw new ArgumentNullException(nameof(contingentDivCourseMapper));
             this.timetableKindRepository = timetableKindRepository ??
                 throw new ArgumentNullException(nameof(timetableKindRepository));
+            this.timetableMapper = timetableMapper ?? 
+                throw new ArgumentNullException(nameof(timetableMapper));
             
             
             
             language = locale.Language;
         }
 
-        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode timeTableKind = TimeTableKindСode.Unknown)
+        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode locTimeTableKindCode = TimeTableKindСode.Unknown)
         {
             var group = groupRepository.Get(id);
 
@@ -65,12 +68,15 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
 
-            if (timeTableKind != TimeTableKindСode.Unknown)
-            {
-                var timetableKindCode = timetableMapper.Map(timeTableKind);
-                var timetableKind = timetableKindRepository.Get(timetableKindCode);
-            }
+            var timetableKindCode = timetableMapper.Map(locTimeTableKindCode);
+            var timetableKind = timetableKindRepository.Get(timetableKindCode);
 
+            //if (timeTableKind != TimeTableKindСode.Unknown)
+            //{
+            //    var timetableKindCode = timetableMapper.Map(timeTableKind);
+            //    var timetableKind = timetableKindRepository.Get(timetableKindCode);
+            //}
+            
             var contract = new GroupEventsContract
             {
                 Id = group.Id,
@@ -89,9 +95,10 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                 || group.IsIntermediaryAttestationAvailableOnWeb
                 || group.IsFinalAttestationAvailableOnWeb;
 
+            
             if (isWebAvailable)
             {
-                using (var repository = new StudentGroupAppointmentsRepository(group, null, fromValue, to))
+                using (var repository = new StudentGroupAppointmentsRepository(group, timetableKind, fromValue, to))
                 {
                     contract.Days = repository
                         .GetAppointments()
@@ -103,7 +110,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                         {
                             ContingentUnitName = a.ContingentUnitName,
                             DivisionAndCourse = contingentDivCourseMapper.Map(a.ContingentUnit),
-                            StudyEventsTimeTableKindCode = null,
+                            StudyEventsTimeTableKindCode = timetableKind != null ? Convert.ToInt32(timetableKind.Code) : 0,
                             Start = a.Start,
                             End = a.End,
                             TimeIntervalString = a.GetTimeIntervalByLanguage(language),
