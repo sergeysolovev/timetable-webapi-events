@@ -71,12 +71,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var timetableKindCode = timetableMapper.Map(locTimeTableKindCode);
             var timetableKind = timetableKindRepository.Get(timetableKindCode);
 
-            //if (timeTableKind != TimeTableKindСode.Unknown)
-            //{
-            //    var timetableKindCode = timetableMapper.Map(timeTableKind);
-            //    var timetableKind = timetableKindRepository.Get(timetableKindCode);
-            //}
-            
+           
             var contract = new GroupEventsContract
             {
                 Id = group.Id,
