@@ -53,7 +53,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             language = locale.Language;
         }
 
-        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode locTimeTableKindCode = TimeTableKindСode.Unknown)
+        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown)
         {
             var group = groupRepository.Get(id);
 
@@ -68,10 +68,9 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
 
-            var timetableKindCode = timetableMapper.Map(locTimeTableKindCode);
+            var timetableKindCode = timetableMapper.Map(localTimeTableKindCode);
             var timetableKind = timetableKindRepository.Get(timetableKindCode);
 
-           
             var contract = new GroupEventsContract
             {
                 Id = group.Id,
@@ -105,7 +104,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                         {
                             ContingentUnitName = a.ContingentUnitName,
                             DivisionAndCourse = contingentDivCourseMapper.Map(a.ContingentUnit),
-                            StudyEventsTimeTableKindCode = timetableKind != null ? Convert.ToInt32(timetableKind.Code) : 0,
+                            StudyEventsTimeTableKindCode = timetableKind != null ? (int)timetableKind.Code : 0,
                             Start = a.Start,
                             End = a.End,
                             TimeIntervalString = a.GetTimeIntervalByLanguage(language),

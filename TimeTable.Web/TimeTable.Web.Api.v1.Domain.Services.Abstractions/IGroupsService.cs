@@ -13,8 +13,8 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Abstractions
         /// </summary>
         /// <param name="id"></param>
         /// <param name="from"></param>
-        /// <param name="timeTableKind"></param>
+        /// <param name="localTimeTableKindCode"></param>
         /// <returns></returns>
-        GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode timeTableKind = TimeTableKindСode.Unknown);
+        GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown);
     }
 }

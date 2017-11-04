@@ -64,7 +64,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, id, nameof(id));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, null, timetable);
+            var events = groupsService.GetWeekEvents(idValue, localTimeTableKindCode : timetable);
 
             if (events == null)
             {
@@ -82,7 +82,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         /// </summary>
         /// <param name="id">The student group's id: integer</param>
         /// <param name="from">The datetime the events start from: datetime</param>
-        /// <param name="timetable">Unknown = 0,Primary = 1,Attestation = 2,Final = 3</param>
+        /// <param name="timetable">All = 0, Primary = 1, Attestation = 2, Final = 3</param>
         /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/events/{from}")]

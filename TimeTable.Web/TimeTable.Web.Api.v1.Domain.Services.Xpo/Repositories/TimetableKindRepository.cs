@@ -9,7 +9,7 @@ using SpbuEducation.TimeTable.Web.Api.v1.DataContracts;
 
 namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.Repositories
 {
-    internal class TimetableKindRepository:XpoRepository
+    internal class TimetableKindRepository : XpoRepository
     {
         public TimetableKindRepository(Session session) : base(session)
         {
