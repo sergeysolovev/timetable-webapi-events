@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /TimeTable.Common
 /TimeTable.Module
+/TimeTable.Web/TimeTable.Web/logs
