@@ -9,21 +9,38 @@ using System.Web.Http;
 
 namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
 {
+    /// <summary>
+    /// Events Controller
+    /// </summary>
     [RoutePrefix(WebApi.RoutePrefix)]
-    class EventsController : ApiController
+    public class EventsController : ApiController
     {
         private readonly IErrorsResultFactory errorsFactory;
-
+        private readonly IEventsService eventsService;
+        
         /// <summary>
         /// Constructor injection
         /// </summary>
         /// <param name="errorsFactory"></param>
-        public EventsController(IErrorsResultFactory errorsFactory)
+        public EventsController(
+            IErrorsResultFactory errorsFactory,
+            IEventsService eventsService)
         {
             this.errorsFactory = errorsFactory ?? 
                 throw new ArgumentNullException(nameof(errorsFactory));
+            this.eventsService = eventsService ??
+                throw new ArgumentNullException(nameof(eventsService));
+
         }
 
+        /// <summary>
+        /// Events Controller
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="timetable"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/events/{from}/{to}")]
         [SwaggerProduces("application/json", "application/xml")]
@@ -46,7 +63,17 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
             {
                 return errorsFactory.CreateBadRequest(this, to, nameof(to));
             }
-            return Content(HttpStatusCode.OK,"test");
+
+            var events = eventsService.GetEvents(idValue, fromValue, toValue, timetable);
+
+            if (events == null)
+            {
+                return errorsFactory.CreateNotFound(this,
+                    $"Student group id={id} was not found"
+                );
+            }
+
+            return Content(HttpStatusCode.OK, events);
         }
     }
 }

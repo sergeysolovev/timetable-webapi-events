@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AddressesService.cs" />
     <Compile Include="DependencyInjection\DomainServicesExtensions.cs" />
+    <Compile Include="EventsService.cs" />
     <Compile Include="Mappers\AddressLocationMapper.cs" />
     <Compile Include="ClassroomsService.cs" />
     <Compile Include="Mappers\ContingentDivisionCourseMapper.cs" />

@@ -51,6 +51,7 @@
     <Compile Include="IAddressesService.cs" />
     <Compile Include="IClassroomsService.cs" />
     <Compile Include="IEducatorsService.cs" />
+    <Compile Include="IEventsService.cs" />
     <Compile Include="IExtracurDivisionsService.cs" />
     <Compile Include="IGroupsService.cs" />
     <Compile Include="IProgramsService.cs" />
