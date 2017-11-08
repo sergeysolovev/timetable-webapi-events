@@ -29,7 +29,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             ContingentDivisionCourseMapper contingentDivCourseMapper,
             TimetableKindRepository timetableKindRepository,
             TimeTableKindCodeMapper timetableMapper,
-            
             LocaleInfo locale)
         {
             this.groupRepository = groupRepository ??
@@ -47,9 +46,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                 throw new ArgumentNullException(nameof(timetableKindRepository));
             this.timetableMapper = timetableMapper ?? 
                 throw new ArgumentNullException(nameof(timetableMapper));
-            
-            
-            
+
             language = locale.Language;
         }
 
