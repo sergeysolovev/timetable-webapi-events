@@ -44,6 +44,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         /// Gets a given student group's events for the current week
         /// </summary>
         /// <param name="id">The student group's id: integer</param>
+        /// <param name="timetable">Unknown = 0,Primary = 1,Attestation = 2,Final = 3</param>
         /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/events")]
@@ -56,14 +57,14 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
             Description = "The group can not be found by a given id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(ErrorsContract),
             Description = "Something went wrong")]
-        public IHttpActionResult GetEvents(string id)
+        public IHttpActionResult GetEvents(string id, TimeTableKindСode timetable = TimeTableKindСode.Unknown)
         {
             if (!int.TryParse(id, out int idValue))
             {
                 return errorsFactory.CreateBadRequest(this, id, nameof(id));
             }
 
-            var events = groupsService.GetWeekEvents(idValue);
+            var events = groupsService.GetWeekEvents(idValue, localTimeTableKindCode : timetable);
 
             if (events == null)
             {
@@ -81,6 +82,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         /// </summary>
         /// <param name="id">The student group's id: integer</param>
         /// <param name="from">The datetime the events start from: datetime</param>
+        /// <param name="timetable">All = 0, Primary = 1, Attestation = 2, Final = 3</param>
         /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/events/{from}")]
@@ -93,7 +95,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
             Description = "The group can not be found by a given id")]
         [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(ErrorsContract),
             Description = "Something went wrong")]
-        public IHttpActionResult GetEvents(string id, string from)
+        public IHttpActionResult GetEvents(string id, string from, TimeTableKindСode timetable = TimeTableKindСode.Unknown)
         {
             if (!int.TryParse(id, out int idValue))
             {
@@ -105,7 +107,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, from, nameof(from));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, fromValue);
+            var events = groupsService.GetWeekEvents(idValue, fromValue, timetable);
 
             if (events == null)
             {

@@ -19,6 +19,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.DependencyInjec
             builder.RegisterType<StudyYearRepository>();
             builder.RegisterType<ProgramRepository>();
             builder.RegisterType<GroupRepository>();
+            builder.RegisterType<TimetableKindRepository>();
 
             builder.RegisterType<EventLocationMapper>();
             builder.RegisterType<AddressLocationMapper>();
@@ -27,6 +28,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.DependencyInjec
             builder.RegisterType<ContingentNameTupleMapper>();
             builder.RegisterType<ExtracurEventMapper>();
             builder.RegisterType<SeatingMapper>();
+            builder.RegisterType<TimeTableKindCodeMapper>();
 
             builder.RegisterType<AddressesService>().As<IAddressesService>();
             builder.RegisterType<ClassroomsService>().As<IClassroomsService>();

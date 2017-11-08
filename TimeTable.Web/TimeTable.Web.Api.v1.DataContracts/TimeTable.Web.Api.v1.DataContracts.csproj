@@ -70,6 +70,7 @@
     <Compile Include="Seating.cs" />
     <Compile Include="StudyDivisionContract.cs" />
     <Compile Include="StudyDivisionProgramLevelContract.cs" />
+    <Compile Include="TimeTableKindCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
