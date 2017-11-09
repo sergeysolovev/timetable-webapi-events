@@ -15,6 +15,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Abstractions
         /// <param name="from"></param>
         /// <param name="localTimeTableKindCode"></param>
         /// <returns></returns>
-        GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown);
+        GroupEventsContract GetWeekEvents(int id, DateTime? from = null, DateTime? toValue = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown);
     }
 }

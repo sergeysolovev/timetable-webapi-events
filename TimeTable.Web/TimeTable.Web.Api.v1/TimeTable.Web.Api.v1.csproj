@@ -101,7 +101,6 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\ClassroomsController.cs" />
     <Compile Include="Controllers\EducatorsController.cs" />
-    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\RootController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ExtracurDivisionsController.cs" />

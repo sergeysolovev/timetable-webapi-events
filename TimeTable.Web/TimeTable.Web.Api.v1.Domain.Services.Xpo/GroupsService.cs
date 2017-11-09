@@ -50,7 +50,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             language = locale.Language;
         }
 
-        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown)
+        public GroupEventsContract GetWeekEvents(int id, DateTime? from = null, DateTime? toValue = null, TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown)
         {
             var group = groupRepository.Get(id);
 
@@ -61,26 +61,42 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
 
             var defaultWeekStart = DateTimeHelper.GetWeekStart(DateTime.Today);
             var fromValue = from ?? defaultWeekStart;
-            var to = fromValue.AddDays(7);
-            var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
-            var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
+            var to = toValue ?? fromValue.AddDays(7);
+            var contract = new GroupEventsContract();
 
+            if (to == toValue)
+            {
+                contract = new GroupEventsContract
+                {
+                    Id = group.Id,
+                    DisplayName = $"{Resources.StudentGroup} {group.Name}",
+                    TimeTableDisplayName = (language == LanguageCode.English) ? "All classes" : "Все занятия",
+                    WeekDisplayText = DateTimeHelper.GetWeekDisplayText(language, fromValue, to),
+                };
+            }
+            else
+            {
+                var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
+                var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
+
+                
+
+                contract = new GroupEventsContract
+                {
+                    Id = group.Id,
+                    DisplayName = $"{Resources.StudentGroup} {group.Name}",
+                    TimeTableDisplayName = (language == LanguageCode.English) ? "All classes" : "Все занятия",
+                    WeekDisplayText = DateTimeHelper.GetWeekDisplayText(language, fromValue, to),
+                    PreviousWeekMonday = previousWeekMonday,
+                    NextWeekMonday = nextWeekMonday,
+                    WeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue),
+                    IsPreviousWeekReferenceAvailable = !string.IsNullOrEmpty(previousWeekMonday),
+                    IsNextWeekReferenceAvailable = !string.IsNullOrEmpty(nextWeekMonday),
+                    IsCurrentWeekReferenceAvailable = (defaultWeekStart != fromValue)
+                };
+            }
             var timetableKindCode = timetableMapper.Map(localTimeTableKindCode);
             var timetableKind = timetableKindRepository.Get(timetableKindCode);
-
-            var contract = new GroupEventsContract
-            {
-                Id = group.Id,
-                DisplayName = $"{Resources.StudentGroup} {group.Name}",
-                TimeTableDisplayName = (language == LanguageCode.English) ? "All classes" : "Все занятия",
-                WeekDisplayText = DateTimeHelper.GetWeekDisplayText(language, fromValue, to),
-                PreviousWeekMonday = previousWeekMonday,
-                NextWeekMonday = nextWeekMonday,
-                WeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue),
-                IsPreviousWeekReferenceAvailable = !string.IsNullOrEmpty(previousWeekMonday),
-                IsNextWeekReferenceAvailable = !string.IsNullOrEmpty(nextWeekMonday),
-                IsCurrentWeekReferenceAvailable = (defaultWeekStart != fromValue)
-            };
 
             var isWebAvailable = group.IsPrimaryAvailableOnWeb
                 || group.IsIntermediaryAttestationAvailableOnWeb
