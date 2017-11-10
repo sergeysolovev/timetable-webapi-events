@@ -162,7 +162,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateInternalServerError(this,"Something went wrong");
             }
 
-            var events = groupsService.GetWeekEvents(idValue, fromValue, toValue, timetable);
+            var events = groupsService.GetEvents(idValue, fromValue, toValue, timetable);
 
             if (events == null)
             {
