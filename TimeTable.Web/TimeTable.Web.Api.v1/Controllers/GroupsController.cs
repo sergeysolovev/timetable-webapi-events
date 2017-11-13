@@ -155,11 +155,12 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
             {
                 return errorsFactory.CreateBadRequest(this, to, nameof(to));
             }
+            
 
             //Edit error message
             if (fromValue > toValue)
             {
-                return errorsFactory.CreateInternalServerError(this,"Something went wrong");
+                return errorsFactory.CreateBadRequest(this, from, to);
             }
 
             var events = groupsService.GetEvents(idValue, fromValue, toValue, timetable);
