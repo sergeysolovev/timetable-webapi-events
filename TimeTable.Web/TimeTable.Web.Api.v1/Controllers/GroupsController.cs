@@ -156,8 +156,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, to, nameof(to));
             }
             
-
-            //Edit error message
             if (fromValue > toValue)
             {
                 return errorsFactory.CreateBadRequest(this, from, to);

@@ -62,14 +62,10 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var defaultWeekStart = DateTimeHelper.GetWeekStart(DateTime.Today);
             var fromValue = from ?? defaultWeekStart;
             var to = fromValue.AddDays(7);
-
-
-
+            
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
-
-
-
+            
             var contract = new GroupEventsContract
             {
                 Id = group.Id,
@@ -90,7 +86,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var isWebAvailable = group.IsPrimaryAvailableOnWeb
                 || group.IsIntermediaryAttestationAvailableOnWeb
                 || group.IsFinalAttestationAvailableOnWeb;
-
             
             if (isWebAvailable)
             {
@@ -176,8 +171,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var isWebAvailable = group.IsPrimaryAvailableOnWeb
                                  || group.IsIntermediaryAttestationAvailableOnWeb
                                  || group.IsFinalAttestationAvailableOnWeb;
-
-
+            
             if (isWebAvailable)
             {
                 using (var repository = new StudentGroupAppointmentsRepository(group, timetableKind, from, to))
