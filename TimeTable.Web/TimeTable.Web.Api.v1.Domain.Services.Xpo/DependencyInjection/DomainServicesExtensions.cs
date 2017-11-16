@@ -37,7 +37,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo.DependencyInjec
             builder.RegisterType<ExtracurDivisionsService>().As<IExtracurDivisionsService>();
             builder.RegisterType<ProgramsService>().As<IProgramsService>();
             builder.RegisterType<GroupsService>().As<IGroupsService>();
-
+            
             return builder;
         }
     }

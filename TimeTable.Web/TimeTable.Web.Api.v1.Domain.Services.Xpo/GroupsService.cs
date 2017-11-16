@@ -62,12 +62,10 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             var defaultWeekStart = DateTimeHelper.GetWeekStart(DateTime.Today);
             var fromValue = from ?? defaultWeekStart;
             var to = fromValue.AddDays(7);
+            
             var previousWeekMonday = DateTimeHelper.GetDateStringForWeb(fromValue.AddDays(-7));
             var nextWeekMonday = DateTimeHelper.GetDateStringForWeb(to);
-
-            var timetableKindCode = timetableMapper.Map(localTimeTableKindCode);
-            var timetableKind = timetableKindRepository.Get(timetableKindCode);
-
+            
             var contract = new GroupEventsContract
             {
                 Id = group.Id,
@@ -82,10 +80,12 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                 IsCurrentWeekReferenceAvailable = (defaultWeekStart != fromValue)
             };
 
+            var timetableKindCode = timetableMapper.Map(localTimeTableKindCode);
+            var timetableKind = timetableKindRepository.Get(timetableKindCode);
+
             var isWebAvailable = group.IsPrimaryAvailableOnWeb
                 || group.IsIntermediaryAttestationAvailableOnWeb
                 || group.IsFinalAttestationAvailableOnWeb;
-
             
             if (isWebAvailable)
             {
@@ -145,6 +145,91 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
             }
 
             return contract;
+        }
+
+        public GroupEventsContract GetEvents(int id, DateTime from, DateTime to,
+            TimeTableKindСode localTimeTableKindCode = TimeTableKindСode.Unknown)
+        {
+            var group = groupRepository.Get(id);
+
+            if (group == null)
+            {
+                return null;
+            }
+
+            var timetableKindCode = timetableMapper.Map(localTimeTableKindCode);
+            var timetableKind = timetableKindRepository.Get(timetableKindCode);
+
+            var contract = new GroupEventsContract
+            {
+                Id = group.Id,
+                DisplayName = $"{Resources.StudentGroup} {group.Name}",
+                TimeTableDisplayName = (language == LanguageCode.English) ? "All classes" : "Все занятия",
+            };
+
+            var isWebAvailable = group.IsPrimaryAvailableOnWeb
+                                 || group.IsIntermediaryAttestationAvailableOnWeb
+                                 || group.IsFinalAttestationAvailableOnWeb;
+            
+            if (isWebAvailable)
+            {
+                using (var repository = new StudentGroupAppointmentsRepository(group, timetableKind, from, to))
+                {
+                    contract.Days = repository
+                        .GetAppointments()
+                        .Where(a => a.IsPublicMaster)
+                        .Where(a => a.EducatorsDisplayText != null)
+                        .OrderBy(a => a.Start)
+                        .ThenBy(a => a.SubjectEnglish)
+                        .Select(a => new GroupEventsContract.Event
+                        {
+                            ContingentUnitName = a.ContingentUnitName,
+                            DivisionAndCourse = contingentDivCourseMapper.Map(a.ContingentUnit),
+                            StudyEventsTimeTableKindCode = timetableKind != null ? (int)timetableKind.Code : 0,
+                            Start = a.Start,
+                            End = a.End,
+                            TimeIntervalString = a.GetTimeIntervalByLanguage(language),
+                            DateWithTimeIntervalString = a.DateTimeIntervalString,
+                            EducatorsDisplayText = a.GetEducatorsDisplayTextByLanguage(language),
+                            LocationsDisplayText = a.GetLocationsDisplayTextByLanguage(language),
+                            HasEducators = !string.IsNullOrEmpty(a.EducatorsDisplayText),
+                            Subject = a.GetSubjectByLanguage(language),
+                            ElectiveDisciplinesCount = a.EducatorAssignment?.FirstWorkUnit?.StudyModule?.ElectiveDisciplinesCount ?? 1,
+                            IsElective = a.EducatorAssignment?.FirstWorkUnit?.StudyModule?.IsFacultative ?? false,
+                            IsAssigned = a.WasScheduled,
+                            IsCancelled = a.IsCancelled,
+                            TimeWasChanged = a.TimeWasChanged,
+                            LocationsWereChanged = a.LocationsWereChanged,
+                            EducatorsWereReassigned = a.EducatorsWereReassigned,
+                            HasTheSameTimeAsPreviousItem = false,
+                            ContingentUnitsDisplayTest = null,
+                            IsStudy = false,
+                            AllDay = false,
+                            WithinTheSameDay = false,
+                            DisplayDateAndTimeIntervalString = a.DateTimeIntervalString,
+                            EducatorIds = a.EventLocations.SelectMany(el => el.Educators).Select(educatorIdMapper.Map),
+                            EventLocations = a.EventLocations.Select(eventLocationMapper.Map)
+                        })
+                        .GroupBy(e => e.Start.Date)
+                        .OrderBy(g => g.Key)
+                        .Select(g => new GroupEventsContract.EventsDay
+                        {
+                            Day = g.Key,
+                            DayStudyEvents = g.AsEnumerable(),
+                            DayString = (language == LanguageCode.English) ?
+                                g.Key.ToString("dddd, MMMM d") :
+                                g.Key.ToString("dddd, d MMMM")
+                        })
+                        .ToList();
+                }
+            }
+            else
+            {
+                contract.Days = Enumerable.Empty<GroupEventsContract.EventsDay>();
+            }
+
+            return contract;
+
         }
     }
 }

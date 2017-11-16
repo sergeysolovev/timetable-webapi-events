@@ -44,7 +44,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         /// Gets a given student group's events for the current week
         /// </summary>
         /// <param name="id">The student group's id: integer</param>
-        /// <param name="timetable">Unknown = 0,Primary = 1,Attestation = 2,Final = 3</param>
+        /// <param name="timetable">Unknown = 0, Primary = 1, Attestation = 2, Final = 3</param>
         /// <returns></returns>
         [HttpGet]
         [Route("groups/{id}/events")]
@@ -64,7 +64,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, id, nameof(id));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, localTimeTableKindCode : timetable);
+            var events = groupsService.GetWeekEvents(idValue, timeTableKindCode : timetable);
 
             if (events == null)
             {
@@ -107,7 +107,61 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, from, nameof(from));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, fromValue, timetable);
+            var events = groupsService.GetWeekEvents(idValue, fromValue, timeTableKindCode : timetable);
+
+            if (events == null)
+            {
+                return errorsFactory.CreateNotFound(this,
+                    $"Student group id={id} was not found"
+                );
+            }
+
+            return Content(HttpStatusCode.OK, events);
+        }
+
+        /// <summary>
+        /// Gets events for a specified date range
+        /// </summary>
+        /// <param name="id">The student group's id: integer</param>
+        /// <param name="from">The datetime the events start from: datetime</param>
+        /// <param name="to">The datetime the events ends: datetime</param>
+        /// <param name="timetable">All = 0, Primary = 1, Attestation = 2, Final = 3</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("groups/{id}/events/{from}/{to}")]
+        [SwaggerProduces("application/json", "application/xml")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(GroupEventsContract),
+            Description = "The student group's events for the time interval were found and returned successfully or no events were found for the group")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(ErrorsContract),
+            Description = "The group's id is not a valid integer or from parameter is not a valid datetime")]
+        [SwaggerResponse(HttpStatusCode.NotFound, Type = typeof(ErrorsContract),
+            Description = "The group can not be found by a given id")]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(ErrorsContract),
+            Description = "Something went wrong")]
+        public IHttpActionResult GetEvents(string id, string from, string to,
+            TimeTableKindСode timetable = TimeTableKindСode.Unknown)
+        {
+            if (!int.TryParse(id, out int idValue))
+            {
+                return errorsFactory.CreateBadRequest(this, id, nameof(id));
+            }
+
+            if (!DateTime.TryParse(from, out DateTime fromValue))
+            {
+                return errorsFactory.CreateBadRequest(this, from, nameof(from));
+            }
+
+            if (!DateTime.TryParse(to, out DateTime toValue))
+            {
+                return errorsFactory.CreateBadRequest(this, to, nameof(to));
+            }
+            
+            if (fromValue > toValue)
+            {
+                return errorsFactory.CreateBadRequest(this, from, to);
+            }
+
+            var events = groupsService.GetEvents(idValue, fromValue, toValue, timetable);
 
             if (events == null)
             {
