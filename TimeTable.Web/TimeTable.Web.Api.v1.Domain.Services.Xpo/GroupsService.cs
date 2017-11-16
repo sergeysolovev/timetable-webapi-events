@@ -165,7 +165,6 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Domain.Services.Xpo
                 Id = group.Id,
                 DisplayName = $"{Resources.StudentGroup} {group.Name}",
                 TimeTableDisplayName = (language == LanguageCode.English) ? "All classes" : "Все занятия",
-                WeekDisplayText = DateTimeHelper.GetWeekDisplayText(language, from, to),
             };
 
             var isWebAvailable = group.IsPrimaryAvailableOnWeb

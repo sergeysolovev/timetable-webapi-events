@@ -64,7 +64,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, id, nameof(id));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, localTimeTableKindCode : timetable);
+            var events = groupsService.GetWeekEvents(idValue, timeTableKindCode : timetable);
 
             if (events == null)
             {
@@ -107,7 +107,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
                 return errorsFactory.CreateBadRequest(this, from, nameof(from));
             }
 
-            var events = groupsService.GetWeekEvents(idValue, fromValue, localTimeTableKindCode : timetable);
+            var events = groupsService.GetWeekEvents(idValue, fromValue, timeTableKindCode : timetable);
 
             if (events == null)
             {
@@ -120,7 +120,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         }
 
         /// <summary>
-        /// Gets a given student group's events for specified time interval
+        /// Gets events for a specified date range
         /// </summary>
         /// <param name="id">The student group's id: integer</param>
         /// <param name="from">The datetime the events start from: datetime</param>
@@ -131,7 +131,7 @@ namespace SpbuEducation.TimeTable.Web.Api.v1.Controllers
         [Route("groups/{id}/events/{from}/{to}")]
         [SwaggerProduces("application/json", "application/xml")]
         [SwaggerResponse(HttpStatusCode.OK, Type = typeof(GroupEventsContract),
-            Description = "The student group's events for the week were found and returned successfully or no events were found for the group")]
+            Description = "The student group's events for the time interval were found and returned successfully or no events were found for the group")]
         [SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(ErrorsContract),
             Description = "The group's id is not a valid integer or from parameter is not a valid datetime")]
         [SwaggerResponse(HttpStatusCode.NotFound, Type = typeof(ErrorsContract),
